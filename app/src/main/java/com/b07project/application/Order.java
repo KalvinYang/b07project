@@ -38,12 +38,12 @@ class Order {
         }
         else if (a instanceof Shopper && status == "Cart") {
             status = "Ordered";
-            orderNumber = Retriever.getNumber(this);
+            //orderNumber = Retriever.getNumber(this);
         }
         else if (a instanceof StoreOwner) {
             status = "Complete";
         }
-        Updater.send(this);
+        //Updater.send(this);
     }
 
     void cancelOrder() {
