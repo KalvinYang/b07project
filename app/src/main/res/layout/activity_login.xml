@@ -33,14 +33,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/editTextEmail"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:drawableLeft="@drawable/baseline_email_24"
         android:ems="10"
+        android:fontFamily="serif"
+        android:hint="Email"
         android:inputType="text|textLongMessage"
-        android:hint="Username"
-        android:drawableLeft="@drawable/baseline_person_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +52,13 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Password"
         android:drawableLeft="@drawable/baseline_lock_24"
+        android:ems="10"
+        android:fontFamily="serif"
+        android:hint="Password"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 </androidx.constraintlayout.widget.ConstraintLayout>
