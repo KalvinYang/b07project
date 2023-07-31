@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".StoreOwnerSignUpActivity">
 
     <Button
         android:id="@+id/SignUpButton"
@@ -13,7 +13,8 @@
         android:layout_marginTop="44dp"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
-        android:text="Login"
+        android:onClick="fromStoreOwnerSignUpToStoreOwnerMain"
+        android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,12 +24,12 @@
         android:id="@+id/StoreSignUpTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="156dp"
         android:fontFamily="serif"
-        android:text="Login"
-        android:textSize="45sp"
+        android:text="Store Owner Sign Up"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintHorizontal_bias="0.605"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="#000000"
-        android:onClick="fromLoginToMain"
+        android:onClick="fromStoreOwnerToSignUp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,4 +75,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SignUpButton"
         app:layout_constraintVertical_bias="0.123" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
