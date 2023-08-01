@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/InputPassword" />
 
     <TextView
         android:id="@+id/StoreSignUpTitle"
@@ -46,8 +46,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StoreSignUpTitle" />
 
+
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/InputPassword"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"

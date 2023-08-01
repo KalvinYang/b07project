@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class ShopperMain extends AppCompatActivity {
 
     @Override
@@ -18,4 +20,10 @@ public class ShopperMain extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    /*public void fromShopperMainToShopperShops(View view){
+        Intent intent = new Intent(this, ShopperShopsActivity.class);
+        startActivity(intent);
+    }*/
+
 }
