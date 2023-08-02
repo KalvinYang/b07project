@@ -21,16 +21,6 @@ public class ShopperMain extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void fromShopperMainToMyCart(View view){
-        Intent intent = new Intent(this, MyCartFragment.class);
-        startActivity(intent);
-    }
-
-    public void fromShopperMainToMyOrders(View view){
-        Intent intent = new Intent(this, MyOrdersFragment.class);
-        startActivity(intent);
-    }
-
     /*public void fromShopperMainToShopperShops(View view){
         Intent intent = new Intent(this, ShopperShopsActivity.class);
         startActivity(intent);

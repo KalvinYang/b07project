@@ -14,14 +14,4 @@ public class StoreOwnerMain extends AppCompatActivity {
         setContentView(R.layout.activity_store_owner_main);
     }
 
-    public void fromStoreOwnerMainToMain(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void fromStoreOwnerMainToOrders(View view){
-        Intent intent = new Intent(this, OrdersFragment.class);
-        startActivity(intent);
-    }
-
 }

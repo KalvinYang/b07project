@@ -8,32 +8,31 @@
 
     <Button
         android:id="@+id/OwnerOrders"
-        android:layout_width="330dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
-        android:onClick="fromShopperMainToMyOrders"
-        android:text="Orders"
+        android:text="My Orders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402" />
+        app:layout_constraintVertical_bias="0.986" />
 
     <Button
         android:id="@+id/ShopButton"
-        android:layout_width="330dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
-        android:text="Shop"
+        android:text="Browse Shops"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OwnerOrders"
-        app:layout_constraintVertical_bias="0.202" />
+        app:layout_constraintHorizontal_bias="0.214"
+        app:layout_constraintStart_toEndOf="@+id/OwnerOrders"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.986" />
 
     <TextView
         android:id="@+id/ShopperMainTitle"
@@ -45,13 +44,14 @@
         android:textSize="34dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
         android:id="@+id/LogOut"
-        android:layout_width="330dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
@@ -59,22 +59,23 @@
         android:text="Log Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ShopButton"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toEndOf="@+id/ShopperMainTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
         android:id="@+id/MyCartButton"
-        android:layout_width="330dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
-        android:onClick="fromShopperMainToMyCart"
         android:text="My Cart"
-        app:layout_constraintBottom_toTopOf="@+id/OwnerOrders"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/OwnerOrders"
+        app:layout_constraintHorizontal_bias="0.763"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ShopperMainTitle" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.986" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
