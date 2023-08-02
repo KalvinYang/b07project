@@ -58,11 +58,9 @@ public class ShopperSignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     progressBar.setVisibility(View.GONE);
-                                    // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(ShopperSignUpActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    //updateUI(user);
                                     Intent intent = new Intent(getApplicationContext(), ShopperMain.class);
                                     startActivity(intent);
                                     finish();
@@ -70,7 +68,6 @@ public class ShopperSignUpActivity extends AppCompatActivity {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(ShopperSignUpActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
                                 }
                             }
                         });
