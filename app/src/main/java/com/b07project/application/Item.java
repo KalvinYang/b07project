@@ -41,4 +41,13 @@ public class Item {
         this.specifications = specifications;
     }
 
+    public String getName (){
+        return this.name;
+    }
+    public String getBrand(){
+        return this.brand;
+    }
+    public float getPrice(){
+        return this.price;
+    }
 }

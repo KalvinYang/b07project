@@ -64,21 +64,21 @@ class Order implements DatabaseObjects{
     public void updateNumber() {
         Query query = ref.child("current");
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int oNum = Integer.parseInt(snapshot.getValue().toString());
-                orderNumber = oNum;
-                oNum++;
-                ref.child("current").setValue(oNum);
-                updateObject();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                return;
-            }
-        });
+//        query.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                int oNum = Integer.parseInt(snapshot.getValue().toString());
+//                orderNumber = oNum;
+//                oNum++;
+//                ref.child("current").setValue(oNum);
+//                updateObject();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                return;
+//            }
+//        });
     }
 
     @Override
@@ -95,4 +95,12 @@ class Order implements DatabaseObjects{
     public void deleteObject() {
 
     }
+
+    public int getOrderNumber(){
+        return this.orderNumber;
+    }
+    public String getStatus(){
+        return this.status;
+    }
+    public void setStatus(String status) {this.status = status;}
 }
