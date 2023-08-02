@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
+        android:onClick="fromStoreOwnerMainToOrders"
         android:text="Store Orders"
         app:layout_constraintBottom_toTopOf="@+id/ShopButton"
         app:layout_constraintEnd_toEndOf="parent"

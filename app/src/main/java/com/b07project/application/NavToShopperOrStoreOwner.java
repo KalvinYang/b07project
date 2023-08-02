@@ -6,22 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class StoreOwnerMain extends AppCompatActivity {
+public class NavToShopperOrStoreOwner extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_owner_main);
+        setContentView(R.layout.activity_nav_to_shopper_or_store_owner);
     }
 
-    public void fromStoreOwnerMainToMain(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+    public void toShopperMain(View view){
+        Intent intent = new Intent(this, ShopperMain.class);
         startActivity(intent);
     }
 
-    public void fromStoreOwnerMainToOrders(View view){
-        Intent intent = new Intent(this, OrdersFragment.class);
+    public void toStoreOwnerMain(View view){
+        Intent intent = new Intent(this, StoreOwnerMain.class);
         startActivity(intent);
     }
-
 }

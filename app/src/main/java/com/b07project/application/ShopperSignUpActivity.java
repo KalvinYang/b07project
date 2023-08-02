@@ -61,7 +61,7 @@ public class ShopperSignUpActivity extends AppCompatActivity {
                                     Toast.makeText(ShopperSignUpActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent intent = new Intent(getApplicationContext(), ShopperMain.class);
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {

@@ -40,6 +40,7 @@ public class MyCartFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static MyCartFragment newInstance(Order order) {
         // idk
+        return null;
     }
 
     @Override

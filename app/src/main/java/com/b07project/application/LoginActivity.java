@@ -50,7 +50,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    /*TODO implement a way to check whether or not the person who logged in is a
+                    Shopper or a Store Owner and if so go to the shopper or store owner page*/
+                    Intent intent = new Intent(LoginActivity.this, NavToShopperOrStoreOwner.class);
                     startActivity(intent);
                     finish();
                 }

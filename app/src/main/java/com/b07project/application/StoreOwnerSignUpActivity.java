@@ -62,7 +62,7 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     //updateUI(user);
-                                    Intent intent = new Intent(getApplicationContext(), StoreOwnerMain.class);
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
