@@ -7,7 +7,7 @@
     tools:context=".LoginActivity">
 
     <Button
-        android:id="@+id/SignUpButton"
+        android:id="@+id/loginbutton"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -17,10 +17,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <TextView
-        android:id="@+id/StoreSignUpTitle"
+        android:id="@+id/logintitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
@@ -33,46 +33,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/editTextEmail"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:drawableLeft="@drawable/baseline_person_24"
+        android:drawableLeft="@drawable/baseline_email_24"
         android:ems="10"
-        android:hint="Username"
+        android:fontFamily="serif"
+        android:hint="Email"
         android:inputType="text|textLongMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StoreSignUpTitle" />
-
+        app:layout_constraintTop_toBottomOf="@+id/logintitle" />
 
     <EditText
-        android:id="@+id/InputPassword"
+        android:id="@+id/editTextTextPassword"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:drawableLeft="@drawable/baseline_lock_24"
         android:ems="10"
+        android:fontFamily="serif"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.567"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="330dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#000000"
-        android:onClick="fromLoginToMain"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignUpButton"
-        app:layout_constraintVertical_bias="0.123" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 </androidx.constraintlayout.widget.ConstraintLayout>
