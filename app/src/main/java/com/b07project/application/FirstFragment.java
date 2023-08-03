@@ -24,7 +24,7 @@ public class FirstFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        o = new Order("me","brand1","itemname",(float)11,200);
+        o = new Order("me","brand1","itemname",200);
         Shopper a = new Shopper("bar","foo");
         String hi = o.changeStatus(a);
         ref.child("testing1").setValue(hi);

@@ -17,7 +17,6 @@ public class Item extends ObjectsToSave{
     float price;
     String brand;
     String specifications;
-    int itemNumber;
 
     //image field may be introduced
 
@@ -30,7 +29,6 @@ public class Item extends ObjectsToSave{
         this.price = price;
         this.brand = brand;
         this.specifications = specifications;
-        this.itemNumber = itemNumber;
     }
 
     //Following methods need to reflect changes in firebase
