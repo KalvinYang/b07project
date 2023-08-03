@@ -75,25 +75,25 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
+        StoreOwner a = new StoreOwner("foo", "bar", "Nike");
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getOrderNum().setText(String.valueOf (localDataSet[position].getOrderNumber()));
-        viewHolder.getStatus().setText(localDataSet[position].getStatus());
-        if (localDataSet[position].getStatus().equals("Pending"))
+        viewHolder.getOrderNum().setText(String.valueOf (localDataSet[position].price));
+        viewHolder.getStatus().setText(localDataSet[position].status);
+        if (localDataSet[position].status.equals("Pending"))
         {
             viewHolder.getPendingButton().setEnabled(false);
             viewHolder.getPendingButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
             viewHolder.getCompleteButton().setOnClickListener(v -> {
-                localDataSet[position].setStatus("Completed");
-                viewHolder.getStatus().setText(localDataSet[position].getStatus());
+                localDataSet[position].changeStatus(a);
+                viewHolder.getStatus().setText(localDataSet[position].status);
                 viewHolder.getCompleteButton().setEnabled(false);
                 viewHolder.getCompleteButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
                 viewHolder.getCompleteButton().setOnClickListener(null);
             });
         }
-        else if(localDataSet[position].getStatus().equals("Completed"))
+        else if(localDataSet[position].status.equals("Completed"))
         {
             viewHolder.getPendingButton().setEnabled(false);
             viewHolder.getPendingButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
@@ -103,8 +103,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         else
         {
             viewHolder.getPendingButton().setOnClickListener(v -> {
-                localDataSet[position].setStatus("Pending");
-                viewHolder.getStatus().setText(localDataSet[position].getStatus());
+                localDataSet[position].changeStatus(a);
+                viewHolder.getStatus().setText(localDataSet[position].status);
                 viewHolder.getPendingButton().setEnabled(false);
                 viewHolder.getPendingButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
@@ -112,8 +112,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             });
 
             viewHolder.getCompleteButton().setOnClickListener(v -> {
-                localDataSet[position].setStatus("Completed");
-                viewHolder.getStatus().setText(localDataSet[position].getStatus());
+                localDataSet[position].changeStatus(a);
+                viewHolder.getStatus().setText(localDataSet[position].status);
                 viewHolder.getPendingButton().setEnabled(false);
                 viewHolder.getPendingButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 viewHolder.getCompleteButton().setEnabled(false);

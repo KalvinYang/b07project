@@ -66,8 +66,8 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getOrderNum().setText(String.valueOf (localDataSet[position].getOrderNumber()));
-        viewHolder.getStatus().setText(localDataSet[position].getStatus());
+        viewHolder.getOrderNum().setText(String.valueOf (localDataSet[position].price));
+        viewHolder.getStatus().setText(localDataSet[position].status);
         viewHolder.getRoot().setOnClickListener(v -> {
             //do onclick stuff in here idk order details not implement
         });

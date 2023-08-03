@@ -97,9 +97,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getBrand().setText(localDataSet[position].getBrand());
-        viewHolder.getName().setText(localDataSet[position].getName());
-        viewHolder.getPrice().setText("$" + String.valueOf(localDataSet[position].getPrice()));
+        viewHolder.getBrand().setText(localDataSet[position].brand);
+        viewHolder.getName().setText(localDataSet[position].name);
+        viewHolder.getPrice().setText("$" + String.valueOf(localDataSet[position].price));
         viewHolder.getMinus().setOnClickListener(v -> {
             int count = Integer.valueOf (viewHolder.getCount().getText().toString().trim());
             if (count > 0) {
