@@ -11,76 +11,110 @@
         android:id="@+id/myCartTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="36dp"
         android:fontFamily="serif"
         android:text="My Cart"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/purchaseButton"
-        android:layout_width="330dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
         android:text="Purchase"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="400dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/funnyCart"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/border"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myCartTitle"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/myCartTitle">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="serif"
+        android:text="Subtotal"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/funnyCart" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="serif"
+        android:text="Taxes"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="serif"
+        android:text="Total"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/subtotalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="serif"
-        android:text="Subtotal"
-        android:textSize="15sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/funnyCart" />
 
     <TextView
-        android:id="@+id/taxesfeesButton"
+        android:id="@+id/taxTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:text="Taxes"
-        android:textSize="15sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="36dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subtotalText" />
 
     <TextView
-        android:id="@+id/totalButton"
-        android:layout_width="37dp"
-        android:layout_height="15dp"
-        android:fontFamily="serif"
-        android:text="Total"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/purchaseButton"
+        android:id="@+id/totalTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="36dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taxesfeesButton"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintTop_toBottomOf="@+id/taxTxt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
