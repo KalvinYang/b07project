@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "232276573185",
+    "firebase_url": "https://b07-project-1f326-default-rtdb.firebaseio.com",
     "project_id": "b07-project-1f326",
     "storage_bucket": "b07-project-1f326.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:232276573185:android:8d59e8ebcc4d44d53b5400",
+        "mobilesdk_app_id": "1:232276573185:android:954d260a19f1beb83b5400",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.b07project.application"
         }
       },
       "oauth_client": [

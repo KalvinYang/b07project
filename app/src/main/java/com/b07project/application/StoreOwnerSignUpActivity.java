@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class StoreOwnerSignUpActivity extends AppCompatActivity {
-    EditText editTextEmail, editTextPassword;
+    EditText editTextEmail, editTextPassword, editTextBrand;
     Button SignUpButton;
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
@@ -31,6 +31,7 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.EmailInput);
         editTextPassword = findViewById(R.id.InputPassword);
+        editTextBrand = findViewById(R.id.BrandInput);
         SignUpButton = findViewById(R.id.SignUpButton);
         progressBar = findViewById(R.id.progressBar);
 
@@ -38,16 +39,21 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String email, password;
+                String email, password,brand;
                 email = editTextEmail.getText().toString();
                 password = editTextPassword.getText().toString();
+                brand = editTextBrand.getText().toString();
 
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(StoreOwnerSignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)){
-                    Toast.makeText(StoreOwnerSignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StoreOwnerSignUpActivity.this, "Enter valid password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(brand)){
+                    Toast.makeText(StoreOwnerSignUpActivity.this, "Enter brand name", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -57,19 +63,15 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     progressBar.setVisibility(View.GONE);
-                                    // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(StoreOwnerSignUpActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    //updateUI(user);
-                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    Intent intent = new Intent(StoreOwnerSignUpActivity.this, LoginActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    // If sign in fails, display a message to the user.
                                     Toast.makeText(StoreOwnerSignUpActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
                                 }
                             }
                         });
