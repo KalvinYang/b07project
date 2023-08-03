@@ -10,7 +10,10 @@ class Shopper extends User{
         super(username, password);
     }
 
-    void clearcart() {
+    void myCart() {
+        current_cart = new Cart(this.username);
+    }
+    void clearCart() {
         current_cart = null;
     }
 }

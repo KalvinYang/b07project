@@ -1,98 +1,105 @@
 package com.b07project.application;
 
-import android.util.Log;
+import java.util.HashMap;
 
-import androidx.annotation.NonNull;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
-
-class Order implements DatabaseObjects{
+class Order extends ObjectsToSave{
     String shopper;
     String brand;
     String i_name;
+    float price;
     int itemNumber;
     // Status can one of the following: Cart (Only shopper can see) > Ordered > Complete | Canceled
     String status;
-    // Get orderNumber from the database
-    int orderNumber;
+    // Get cartNumber when added to cart
+    int cartNumber;
 
-    private DatabaseReference ref = MainActivity.db.getReference("order");
+    // private DatabaseReference ref = MainActivity.db.getReference(this.getClass().getSimpleName());
 
     // When someone makes an order (Adds something to cart)
-    Order(String shopper, String brand, String i_name, int itemNumber) {
+    Order(String shopper, String brand, String i_name, float price, int itemNumber) {
+        super(Order.class);
         this.shopper = shopper;
         this.brand = brand;
         this.status = "Cart";
+        this.price = price;
         this.i_name = i_name;
-        this.orderNumber = 0;
         this.itemNumber = itemNumber;
+        this.cartNumber = 0;
     }
 
     // Taking information from database.
-    Order(String shopper, String brand, String i_name, String status, int orderNumber, int itemNumber) {
+    Order(String shopper, String brand, String i_name, String status, int orderNumber, float price, int itemNumber, int cartNumber) {
+        super(Order.class);
         this.shopper = shopper;
         this.brand = brand;
         this.status = status;
         this.i_name = i_name;
-        this.orderNumber = orderNumber;
         this.itemNumber = itemNumber;
+        this.cartNumber = cartNumber;
     }
 
-    void changeStatus(User a) {
-        if (a instanceof Shopper && status == "Cart") {
+    String changeStatus(User a) {
+        if (a instanceof Shopper && status.equals("Cart")) {
             status = "Ordered";
-            updateNumber();
-
         }
         else if (a instanceof StoreOwner) {
             status = "Complete";
-            updateObject();
         }
+        return updateObject(createHashMap());
     }
-
-    void cancelOrder() {
+    String cancelOrder() {
         status = "Canceled";
+        return updateObject(createHashMap());
     }
 
     @Override
-    public void updateNumber() {
-        Query query = ref.child("current");
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int oNum = Integer.parseInt(snapshot.getValue().toString());
-                orderNumber = oNum;
-                oNum++;
-                ref.child("current").setValue(oNum);
-                updateObject();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                return;
-            }
-        });
+    HashMap<String, Object> createHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("shopper",this.shopper);
+        map.put("brand",this.brand);
+        map.put("i_name",this.i_name);
+        map.put("status",this.status);
+        map.put("price",this.price);
+        map.put("itemNumber",this.itemNumber);
+        map.put("cartNumber",this.cartNumber);
+        return map;
     }
 
-    @Override
-    public void updateObject() {
-        ref.child(Integer.toString(this.orderNumber)).child("shopper").setValue(this.shopper);
-        ref.child(Integer.toString(this.orderNumber)).child("brand").setValue(this.brand);
-        ref.child(Integer.toString(this.orderNumber)).child("i_name").setValue(this.i_name);
-        ref.child(Integer.toString(this.orderNumber)).child("status").setValue(this.status);
-        ref.child(Integer.toString(this.orderNumber)).child("orderNumber").setValue(this.orderNumber);
-        ref.child(Integer.toString(this.orderNumber)).child("itemNumber").setValue(this.itemNumber);
-    }
-
-    @Override
-    public void deleteObject() {
-
-    }
+    //@Override
+    //    public void updateNumber() {
+    //        Query query = ref.child("current");
+    //
+    //        query.addListenerForSingleValueEvent(new ValueEventListener() {
+    //            @Override
+    //            public void onDataChange(@NonNull DataSnapshot snapshot) {
+    //                int Num = Integer.parseInt(snapshot.getValue().toString());
+    //                orderNumber = Num;
+    //                Num++;
+    //                ref.child("current").setValue(Num);
+    //                updateObject();
+    //            }
+    //
+    //            @Override
+    //            public void onCancelled(@NonNull DatabaseError error) {
+    //                return;
+    //            }
+    //        });
+    //    }
+    //
+    //    @Override
+    //    public void updateObject() {
+    //        ref.child(Integer.toString(this.orderNumber)).child("shopper").setValue(this.shopper);
+    //        ref.child(Integer.toString(this.orderNumber)).child("brand").setValue(this.brand);
+    //        ref.child(Integer.toString(this.orderNumber)).child("i_name").setValue(this.i_name);
+    //        ref.child(Integer.toString(this.orderNumber)).child("status").setValue(this.status);
+    //        ref.child(Integer.toString(this.orderNumber)).child("orderNumber").setValue(this.orderNumber);
+    //        ref.child(Integer.toString(this.orderNumber)).child("price").setValue(this.price);
+    //        ref.child(Integer.toString(this.orderNumber)).child("itemNumber").setValue(this.itemNumber);
+    //        ref.child(Integer.toString(this.orderNumber)).child("cartNumber").setValue(this.cartNumber);
+    //    }
+    //
+    //    @Override
+    //    public void deleteObject() {
+    //        ref.child(Integer.toString(this.orderNumber)).removeValue();
+    //    }
 }
