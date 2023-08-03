@@ -17,12 +17,13 @@ public class Item extends ObjectsToSave{
     float price;
     String brand;
     String specifications;
+    private String key;
 
     //image field may be introduced
 
     DatabaseReference ref = MainActivity.db.getReference("Store");
 
-    Item(String name, String description, float price, String brand, String specifications, int itemNumber) {
+    Item(String name, String description, float price, String brand, String specifications) {
         super(Item.class);
         this.name = name;
         this.description = description;
@@ -53,30 +54,30 @@ public class Item extends ObjectsToSave{
         this.specifications = specifications;
     }
 
-
-    void saveItem() {
+    void updateItem(){
         updateObject(createHashMap());
+    }
+    void saveItem() {
+        saveObject(createHashMap());
     }
 
     public void deleteobject(){
-        String key = this.findItem();
+        this.findItem();
         ref.child(key).removeValue();
     }
 
-    public String findItem() {
+    public void findItem() {
         Query query = ref.equalTo("brand",this.brand).equalTo("name",this.name);
-        final String[] key = new String[1];
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                key[0] = snapshot.getKey();
+                key = snapshot.getKey();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        return key[0];
     }
 
 

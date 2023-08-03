@@ -15,21 +15,21 @@ public class Cart extends ObjectsToSave{
         super(Cart.class);
         this.shopper = shopper;
         status = "Pending";
-        orders = new ArrayList<Order>();
-        orderID = new ArrayList<String>();
+        orders = new ArrayList<>();
+        orderID = new ArrayList<>();
     }
 
     Cart(String shopper, String status){
         super(Cart.class);
         this.shopper =shopper;
         this.status = status;
-        orderID = new ArrayList<String>();
+        orderID = new ArrayList<>();
     }
 
     void addOrder(Order order) {
         // initialization of cart if not initialized already
         if(orders == null){
-            orders = new ArrayList<Order>();
+            orders = new ArrayList<>();
         }
         orders.add(order);
     }
@@ -54,6 +54,7 @@ public class Cart extends ObjectsToSave{
             for ( Order o : orders) {
                 orderID.add(o.changeStatus(a));
             }
+            saveObject(createHashMap());
         }
     }
 
@@ -63,7 +64,7 @@ public class Cart extends ObjectsToSave{
         map.put("shopper",this.shopper);
         int item = 1;
         for (String ID : orderID) {
-            map.put("Item"+Integer.toString(item),ID);
+            map.put("Item"+item,ID);
             item++;
         }
         return map;
