@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NavToShopperOrStoreOwner">
+
+    <Button
+        android:id="@+id/toShoppers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toShopperMain"
+        android:text="Shopper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/ToStoreOwners"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toStoreOwnerMain"
+        android:text="Store Owner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toShoppers" />
+
+    <TextView
+        android:id="@+id/TempTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This page is temporary and exists only to allow navigation to the shopper and store owner page"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.273" />
+</androidx.constraintlayout.widget.ConstraintLayout>
