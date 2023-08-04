@@ -62,4 +62,19 @@
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#000000"
+        android:fontFamily="serif"
+        android:onClick="LoginToFrontpage"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginbutton"
+        app:layout_constraintVertical_bias="0.255" />
 </androidx.constraintlayout.widget.ConstraintLayout>

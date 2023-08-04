@@ -64,6 +64,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void loginWithEmail(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -100,5 +107,10 @@ public class LoginActivity extends AppCompatActivity {
         }
         startActivity(intent);
         finish();
+    }
+
+    public void LoginToFrontpage(View view){
+        Intent intent = new Intent(this,MainPage.class);
+        startActivity(intent);
     }
 }
