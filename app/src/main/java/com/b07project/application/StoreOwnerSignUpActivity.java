@@ -38,7 +38,6 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
         SignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
                 String email, password,brand;
                 email = editTextEmail.getText().toString();
                 password = editTextPassword.getText().toString();
@@ -56,6 +55,8 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                     Toast.makeText(StoreOwnerSignUpActivity.this, "Enter brand name", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                progressBar.setVisibility(View.VISIBLE);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
