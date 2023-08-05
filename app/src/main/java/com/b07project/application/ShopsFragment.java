@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.AbstractListDetailFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +21,7 @@ import java.util.ArrayList;
  * Use the {@link ShopsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShopsFragment extends Fragment {
+public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,7 +79,7 @@ public class ShopsFragment extends Fragment {
         shopsRecycler = view.findViewById(R.id.ShopsRecyclerView);
         shopsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         shopsRecycler.setHasFixedSize(true);
-        ShopsAdapter shopsAdapter = new ShopsAdapter(getContext(),storeArr);
+        ShopsAdapter shopsAdapter = new ShopsAdapter(getContext(),storeArr,this);
         shopsRecycler.setAdapter(shopsAdapter);
         shopsAdapter.notifyDataSetChanged();
 
@@ -90,4 +92,12 @@ public class ShopsFragment extends Fragment {
         storeArr.add(new TestStore("Store2"));
     }
 
+    @Override
+    public void ViewShopClick(String ViewStoreName) {
+        Fragment fragment = ShopperShopFragment.newInstance(ViewStoreName);
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.ShopperFrameLayout, fragment, "ShopperViewShopView");
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

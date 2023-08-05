@@ -50,7 +50,6 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
             itemName = itemView.findViewById(R.id.ItemName);
             viewItemBtn = itemView.findViewById(R.id.ViewItemButton);
             AddToCartBtn = itemView.findViewById(R.id.AddToCartButton);
-
         }
     }
 

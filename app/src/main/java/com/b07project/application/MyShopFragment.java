@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.b07project.application.databinding.FragmentFirstBinding;
+import com.b07project.application.databinding.MyShopRowBinding;
+
 import java.util.ArrayList;
 
 /**
@@ -32,6 +35,7 @@ public class MyShopFragment extends Fragment {
 
     private ArrayList<String> items;
     private RecyclerView myShopRecyclerView;
+    private FragmentFirstBinding MyShopBinding;
 
 
     public MyShopFragment() {

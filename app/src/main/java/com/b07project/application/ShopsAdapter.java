@@ -15,14 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsHolder>{
+public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsHolder> {
 
     Context context;
     ArrayList<TestStore> TestStoreArr;
 
-    public ShopsAdapter(Context context, ArrayList<TestStore> TestStoreArr) {
+    private ViewShopClickListener viewShopClickListener;
+
+    public ShopsAdapter(Context context, ArrayList<TestStore> TestStoreArr, ViewShopClickListener viewShopClickListener) {
         this.context = context;
         this.TestStoreArr = TestStoreArr;
+        this.viewShopClickListener = viewShopClickListener;
     }
 
     @NonNull
@@ -41,7 +44,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsHolder>
         holder.viewShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                viewShopClickListener.ViewShopClick(testStore.StoreName);
             }
         });
     }
@@ -60,7 +63,17 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsHolder>
             super(itemView);
             shopRowName = itemView.findViewById(R.id.ShopRowName);
             viewShop = itemView.findViewById(R.id.ViewShopButton);
+            viewShop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
+    }
+
+    public interface ViewShopClickListener{
+        public void ViewShopClick(String ViewStoreName);
     }
 
 }

@@ -73,6 +73,9 @@ public class ShopperShopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dataInitialize();
 
+        TextView ShopViewShopName = view.findViewById(R.id.BrandName);
+        ShopViewShopName.setText(mParam1);
+
         itemsRecycler = view.findViewById(R.id.StorePageRecyclerView);
         itemsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         itemsRecycler.setHasFixedSize(true);
