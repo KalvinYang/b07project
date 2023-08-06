@@ -50,7 +50,9 @@ public class ShopperSignUpActivity extends AppCompatActivity {
                     Toast.makeText(ShopperSignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 progressBar.setVisibility(View.VISIBLE);
+
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override

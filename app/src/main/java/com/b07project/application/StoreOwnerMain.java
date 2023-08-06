@@ -12,18 +12,26 @@ import android.widget.Button;
 
 public class StoreOwnerMain extends AppCompatActivity {
 
-    Button OrdersFragmentBtn;
+    Button OrdersFragmentBtn, StoreOwnerViewMyShopBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_owner_main);
 
         OrdersFragmentBtn = findViewById(R.id.OwnerOrders);
+        StoreOwnerViewMyShopBtn = findViewById(R.id.ViewMyShopButton);
 
         OrdersFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 replaceFragment(new OrdersFragment());
+            }
+        });
+
+        StoreOwnerViewMyShopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new MyShopFragment());
             }
         });
     }

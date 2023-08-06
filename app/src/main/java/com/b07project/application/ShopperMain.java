@@ -39,9 +39,16 @@ public class ShopperMain extends AppCompatActivity {
             }
         });
 
+        ShopsFragmentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new ShopsFragment());
+            }
+        });
+
     }
 
-    private void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.ShopperFrameLayout,fragment);
