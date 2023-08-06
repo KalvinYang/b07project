@@ -63,12 +63,6 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsHolder>
             super(itemView);
             shopRowName = itemView.findViewById(R.id.ShopRowName);
             viewShop = itemView.findViewById(R.id.ViewShopButton);
-            viewShop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
         }
     }
 
@@ -77,3 +71,4 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsHolder>
     }
 
 }
+ 

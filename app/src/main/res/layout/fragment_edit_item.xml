@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddItemFragment">
+    tools:context=".EditItemFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/AddItemTitle"
-            android:layout_width="0dp"
+            android:id="@+id/EditItemTitle"
+            android:layout_width="411dp"
             android:layout_height="wrap_content"
             android:background="#000000"
             android:backgroundTint="#000000"
             android:fontFamily="serif"
-            android:text="Add Item to Store:"
+            android:text="Edit:"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,35 +25,35 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextText"
-            android:layout_width="0dp"
+            android:id="@+id/EditItemName"
+            android:layout_width="411dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="serif"
             android:inputType="text"
             android:text="Name:"
-            app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
+            app:layout_constraintBottom_toTopOf="@+id/EditItemDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddItemTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/EditItemTitle" />
 
         <EditText
-            android:id="@+id/editTextNumberDecimal"
+            android:id="@+id/EditItemPrice"
             android:layout_width="411dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="serif"
             android:inputType="numberDecimal"
             android:text="Price:"
-            app:layout_constraintBottom_toTopOf="@+id/AddItemToStoreButton"
+            app:layout_constraintBottom_toTopOf="@+id/EditItemBackButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+            app:layout_constraintTop_toBottomOf="@+id/EditItemSpecification" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/EditItemDescription"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ems="10"
@@ -61,14 +61,14 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:text="Description:"
-            app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine2"
+            app:layout_constraintBottom_toTopOf="@+id/EditItemSpecification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+            app:layout_constraintTop_toBottomOf="@+id/EditItemName" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine2"
+            android:id="@+id/EditItemSpecification"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ems="10"
@@ -76,35 +76,34 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:text="Specifications:"
-            app:layout_constraintBottom_toTopOf="@+id/editTextNumberDecimal"
+            app:layout_constraintBottom_toTopOf="@+id/EditItemPrice"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+            app:layout_constraintTop_toBottomOf="@+id/EditItemDescription" />
 
         <Button
-            android:id="@+id/AddItemToStoreButton"
+            android:id="@+id/EditItemToStoreButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
             android:backgroundTint="#000000"
             android:fontFamily="serif"
-            android:text="Add Item"
+            android:text="Edit Item"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/AddItemBackButton"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/EditItemBackButton" />
 
         <Button
-            android:id="@+id/AddItemBackButton"
+            android:id="@+id/EditItemBackButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
             android:fontFamily="serif"
             android:text="Back"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/EditItemToStoreButton"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/AddItemToStoreButton"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

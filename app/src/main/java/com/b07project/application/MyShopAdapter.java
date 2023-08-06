@@ -16,11 +16,13 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
 
     Context context;
     ArrayList<String> Myitems;
+    private MyShopEditItemClickListener editItemClickListener;
 
 
-    public MyShopAdapter(Context context, ArrayList<String> Myitems){
+    public MyShopAdapter(Context context, ArrayList<String> Myitems, MyShopEditItemClickListener editItemClickListener){
         this.context = context;
         this.Myitems = Myitems;
+        this. editItemClickListener = editItemClickListener;
     }
 
     @NonNull
@@ -34,6 +36,12 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
     public void onBindViewHolder(@NonNull MyShopAdapter.MyShopHolder holder, int position) {
         String item = Myitems.get(position);
         holder.MyItem.setText(item);
+        holder.EditMyItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editItemClickListener.editItemClick(item);
+            }
+        });
     }
 
     @Override
@@ -51,5 +59,9 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
             EditMyItemBtn = itemView.findViewById(R.id.EditItemButton);
             RemoveItemBtn = itemView.findViewById(R.id.RemoveItemButton);
         }
+    }
+
+    public interface MyShopEditItemClickListener{
+        public void editItemClick(String item);
     }
 }

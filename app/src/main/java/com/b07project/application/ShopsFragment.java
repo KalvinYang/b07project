@@ -79,6 +79,7 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
         shopsRecycler = view.findViewById(R.id.ShopsRecyclerView);
         shopsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         shopsRecycler.setHasFixedSize(true);
+        //Take note of this line right below
         ShopsAdapter shopsAdapter = new ShopsAdapter(getContext(),storeArr,this);
         shopsRecycler.setAdapter(shopsAdapter);
         shopsAdapter.notifyDataSetChanged();
@@ -88,6 +89,16 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
     private void dataInitialize(){
 
         storeArr = new ArrayList<>();
+        storeArr.add(new TestStore("Store1"));
+        storeArr.add(new TestStore("Store2"));
+        storeArr.add(new TestStore("Store1"));
+        storeArr.add(new TestStore("Store2"));
+        storeArr.add(new TestStore("Store1"));
+        storeArr.add(new TestStore("Store2"));
+        storeArr.add(new TestStore("Store1"));
+        storeArr.add(new TestStore("Store2"));
+        storeArr.add(new TestStore("Store1"));
+        storeArr.add(new TestStore("Store2"));
         storeArr.add(new TestStore("Store1"));
         storeArr.add(new TestStore("Store2"));
     }
