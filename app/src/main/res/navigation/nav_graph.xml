@@ -28,4 +28,40 @@
         android:name="com.b07project.application.SignUpActivity"
         android:label="activity_sign_up"
         tools:layout="@layout/activity_sign_up" />
+    <fragment
+        android:id="@+id/myShopFragment"
+        android:name="com.b07project.application.MyShopFragment"
+        android:label="fragment_my_shop"
+        tools:layout="@layout/fragment_my_shop" >
+        <action
+            android:id="@+id/action_myShopFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addItemFragment"
+        android:name="com.b07project.application.AddItemFragment"
+        android:label="fragment_add_item"
+        tools:layout="@layout/fragment_add_item" >
+        <action
+            android:id="@+id/action_addItemFragment_to_myShopFragment"
+            app:destination="@id/myShopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopsFragment"
+        android:name="com.b07project.application.ShopsFragment"
+        android:label="fragment_shops"
+        tools:layout="@layout/fragment_shops" >
+        <action
+            android:id="@+id/action_shopsFragment_to_shopperShopFragment"
+            app:destination="@id/shopperShopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopperShopFragment"
+        android:name="com.b07project.application.ShopperShopFragment"
+        android:label="fragment_shopper_shop"
+        tools:layout="@layout/fragment_shopper_shop" >
+        <action
+            android:id="@+id/action_shopperShopFragment_to_shopsFragment"
+            app:destination="@id/shopsFragment" />
+    </fragment>
 </navigation>
