@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.b07project.application.MVP.LoginModel;
+import com.b07project.application.MVP.LoginPresenter;
+import com.b07project.application.MVP.LoginView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,12 +27,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ktx.Firebase;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     private FirebaseAuth firebaseAuth;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button loginButton;
+    private LoginPresenter presenter;
 
     private DatabaseReference ref = MainActivity.db.getReference("Owner");
 
@@ -43,74 +47,46 @@ public class LoginActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextTextPassword);
         loginButton = findViewById(R.id.loginbutton);
-
+        presenter = new LoginPresenter(this, new LoginModel());
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = editTextEmail.getText().toString().trim();
-                String password = editTextPassword.getText().toString().trim();
-
-                if (TextUtils.isEmpty(email)){
-                    Toast.makeText(LoginActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(password)){
-                    Toast.makeText(LoginActivity.this, "Enter valid password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                loginWithEmail(email, password);
+                presenter.login();
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void loginWithEmail(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Query query = ref.orderByValue().equalTo(email);
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            boolean isShopOwner = snapshot.getValue() != null;
-                            Navigate(isShopOwner);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(LoginActivity.this, "Error logging in.",Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                else {
-                    Toast.makeText(LoginActivity.this, "The email or password you entered is incorrect. Please try again.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    void Navigate(boolean isShopOwner){
-        Intent intent;
-        if (isShopOwner){
-            intent = new Intent(LoginActivity.this, StoreOwnerMain.class);
-        }
-        else{
-            intent = new Intent(LoginActivity.this, ShopperMain.class);
-        }
-        startActivity(intent);
-        finish();
     }
 
     public void LoginToFrontpage(View view){
         Intent intent = new Intent(this,MainPage.class);
         startActivity(intent);
+    }
+
+    @Override
+    public String getEmail() {
+        return editTextEmail.getText().toString().trim();
+    }
+
+    @Override
+    public String getPassword() {
+        return editTextPassword.getText().toString().trim();
+    }
+
+    @Override
+    public void moveToStoreOwner() {
+        Intent intent = new Intent(LoginActivity.this, StoreOwnerMain.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void moveToShopper() {
+        Intent intent = new Intent(LoginActivity.this, ShopperMain.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void makeToast(String msg) {
+        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
     }
 }

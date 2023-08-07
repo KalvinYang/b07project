@@ -1,5 +1,6 @@
 package com.b07project.application;
 
+import androidx.annotation.Keep;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.widget.Button;
 public class StoreOwnerMain extends AppCompatActivity {
 
     Button OrdersFragmentBtn, StoreOwnerViewMyShopBtn;
+    String brand;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,10 @@ public class StoreOwnerMain extends AppCompatActivity {
 
         OrdersFragmentBtn = findViewById(R.id.OwnerOrders);
         StoreOwnerViewMyShopBtn = findViewById(R.id.ViewMyShopButton);
+        //TODO: Hook database to fetch the brand associated with the current store owner.
+        //TODO: Keep in mind Firebase accesses are Asynch so please synchronize the brand fetch before proceeding otherwise crashes will occur in later brand accesses.
+
+        //this.brand = ;
 
         OrdersFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,5 +48,7 @@ public class StoreOwnerMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);
         fragmentTransaction.commit();
     }
-
+    public String getBrand(){
+        return this.brand;
+    }
 }

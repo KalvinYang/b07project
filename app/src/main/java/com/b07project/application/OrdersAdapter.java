@@ -11,124 +11,109 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
-
     private Order[] localDataSet;
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder)
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView orderNum;
+        private final TextView orderID;
         private final TextView status;
-        private final Button pendingButton;
+        private final Button canceledButton;
         private final Button completeButton;
         private final View root;
 
         public ViewHolder(View view) {
             super(view);
-            // Define click listener for the ViewHolder's View
 
-            orderNum = (TextView) view.findViewById(R.id.orderNum);
+            orderID = (TextView) view.findViewById(R.id.orderKey);
             status = (TextView) view.findViewById(R.id.status);
             completeButton = (Button) view.findViewById(R.id.completedButton);
-            pendingButton = (Button) view.findViewById(R.id.pendingButton);
+            canceledButton = (Button) view.findViewById(R.id.canceledButton);
             root = view;
         }
 
         public TextView getStatus() {
             return status;
         }
-        public TextView getOrderNum(){
-            return orderNum;
-        }
+        public TextView getOrderID(){
+            return orderID;
+        } // no order num using order key
         public View getRoot(){
             return root;
         }
         public Button getCompleteButton(){
             return completeButton;
         }
-        public Button getPendingButton(){
-            return pendingButton;
+        public Button getCanceledButton(){
+            return canceledButton;
         }
     }
 
-    /**
-     * Initialize the dataset of the Adapter
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView
-     */
     public OrdersAdapter(Order[] dataSet) {
         localDataSet = dataSet;
     }
-    // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.itemorderstoreownerlayout, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         StoreOwner a = new StoreOwner("foo", "bar", "Nike");
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.getOrderNum().setText(String.valueOf (localDataSet[position].price));
+        viewHolder.getOrderID().setText(String.valueOf (localDataSet[position].price));
         viewHolder.getStatus().setText(localDataSet[position].status);
-        if (localDataSet[position].status.equals("Pending"))
+        if (localDataSet[position].status.equals("Canceled"))
         {
-            viewHolder.getPendingButton().setEnabled(false);
-            viewHolder.getPendingButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
+            viewHolder.getCanceledButton().setEnabled(false);
+            viewHolder.getCanceledButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
             viewHolder.getCompleteButton().setOnClickListener(v -> {
                 localDataSet[position].changeStatus(a);
                 viewHolder.getStatus().setText(localDataSet[position].status);
                 viewHolder.getCompleteButton().setEnabled(false);
                 viewHolder.getCompleteButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
+                //TODO: Perform database access here to mark the localDataSet[position] order object to the 'Completed' status
                 viewHolder.getCompleteButton().setOnClickListener(null);
             });
         }
         else if(localDataSet[position].status.equals("Completed"))
         {
-            viewHolder.getPendingButton().setEnabled(false);
-            viewHolder.getPendingButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
+            viewHolder.getCanceledButton().setEnabled(false);
+            viewHolder.getCanceledButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
             viewHolder.getCompleteButton().setEnabled(false);
             viewHolder.getCompleteButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
         }
         else
         {
-            viewHolder.getPendingButton().setOnClickListener(v -> {
+            viewHolder.getCanceledButton().setOnClickListener(v -> {
                 localDataSet[position].changeStatus(a);
                 viewHolder.getStatus().setText(localDataSet[position].status);
-                viewHolder.getPendingButton().setEnabled(false);
-                viewHolder.getPendingButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
+                viewHolder.getCanceledButton().setEnabled(false);
+                viewHolder.getCanceledButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
-                viewHolder.getPendingButton().setOnClickListener(null);
+                //TODO: Perform database access here to mark the localDataSet[position] order object to the 'Canceled' status
+                viewHolder.getCanceledButton().setOnClickListener(null);
             });
 
             viewHolder.getCompleteButton().setOnClickListener(v -> {
                 localDataSet[position].changeStatus(a);
                 viewHolder.getStatus().setText(localDataSet[position].status);
-                viewHolder.getPendingButton().setEnabled(false);
-                viewHolder.getPendingButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
+                viewHolder.getCanceledButton().setEnabled(false);
+                viewHolder.getCanceledButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 viewHolder.getCompleteButton().setEnabled(false);
                 viewHolder.getCompleteButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
-                viewHolder.getPendingButton().setOnClickListener(null);
+                //TODO: Perform database access here to mark the localDataSet[position] order object to the 'Completed' status
+                viewHolder.getCanceledButton().setOnClickListener(null);
                 viewHolder.getCompleteButton().setOnClickListener(null);
             });
         }
         viewHolder.getRoot().setOnClickListener(v -> {
-            //do onclick stuff in here idk order details not implement
+
         });
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localDataSet.length;
