@@ -32,7 +32,6 @@ public class MyOrdersFragment extends Fragment {
     //for testing
     private Order[] createSampleOrders() {
         List<Order> orders = new ArrayList<>();
-        //Order(String shopper, String brand, String i_name, String status, int orderNumber, int itemNumber)
         orders.add (new Order ("bob1", "mike", "shoe", "Completed", 0));
         orders.add (new Order ("bob2", "chen", "sock", "Ordered", 1));
         Order[] arr = new Order[orders.size()];

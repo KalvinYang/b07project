@@ -2,13 +2,15 @@ package com.b07project.application;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,11 +20,8 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     private Item[] localDataSet;
+    private Cart cartInstance;
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder)
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView brand;
         private final TextView price;
@@ -30,11 +29,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         private final TextView count;
         private final Button plus;
         private final Button minus;
+        private final Button purchase;
         private final View root;
 
         public ViewHolder(View view) {
             super(view);
-            // Define click listener for the ViewHolder's View
 
             brand = (TextView) view.findViewById(R.id.brand);
             price = (TextView) view.findViewById(R.id.price);
@@ -42,6 +41,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             count = (TextView) view.findViewById(R.id.count);
             plus = (Button) view.findViewById(R.id.plusButton);
             minus = (Button) view.findViewById(R.id.minusButton);
+            purchase = (Button) view.findViewById(R.id.purchaseButton);
             root = view;
         }
 
@@ -51,7 +51,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public TextView getPrice(){
             return price;
         }
-
         public TextView getCount() {
             return count;
         }
@@ -67,39 +66,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             return plus;
         }
 
+        public Button getPurchaseButton() { return purchase; }
+
         public View getRoot(){
             return root;
         }
+
     }
 
-    /**
-     * Initialize the dataset of the Adapter
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView
-     */
-    public CartAdapter(Item[] dataSet) {
+    public CartAdapter(Item[] dataSet, Cart cart) {
         localDataSet = dataSet;
+        cartInstance = cart;
     }
-    // Create new views (invoked by the layout manager)
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.itemlayout, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
         viewHolder.getBrand().setText(localDataSet[position].brand);
         viewHolder.getName().setText(localDataSet[position].name);
-        viewHolder.getPrice().setText("$" + String.valueOf(localDataSet[position].price));
+        viewHolder.getPrice().setText("$" + String.valueOf(cartInstance.totalPrice()));
         viewHolder.getMinus().setOnClickListener(v -> {
             int count = Integer.valueOf (viewHolder.getCount().getText().toString().trim());
             if (count > 0) {
@@ -121,12 +114,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             viewHolder.getCount().setText(String.valueOf(count));
             notifyDataSetChanged();
         });
+        viewHolder.getPurchaseButton().setOnClickListener(v -> {
+            viewHolder.getPurchaseButton().setEnabled(false);
+            viewHolder.getPurchaseButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
+            clearCart();
+            notifyDataSetChanged();
+            FragmentManager manager = ((AppCompatActivity) viewHolder.getRoot().getContext()).getSupportFragmentManager();
+            Fragment shopsFragment = new ShopsFragment();
+            manager.beginTransaction()
+                    .replace(R.id.frameLayout3, shopsFragment)
+                    .commit();
+        });
         viewHolder.getRoot().setOnClickListener(v -> {
-            //do onclick stuff in here idk order details not implement
+            //don't do the functionality so that when you click into the item it leads to the individual item page
         });
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    private void clearCart() {
+        Item[] emptyCart = new Item[0];
+        localDataSet = emptyCart;
+    }
+
     @Override
     public int getItemCount() {
         return localDataSet.length;
