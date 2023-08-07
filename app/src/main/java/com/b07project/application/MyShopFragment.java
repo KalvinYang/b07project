@@ -40,8 +40,9 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
 
     private ArrayList<String> items;
     private RecyclerView myShopRecyclerView;
-    public MyShopFragment() {
+    public MyShopFragment(/*String brand*/) {
         // Required empty public constructor
+        //this.mParam1 = brand;
     }
 
     /**

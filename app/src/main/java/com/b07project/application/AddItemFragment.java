@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,6 +79,17 @@ public class AddItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //TODO Adds an item to the store
+                EditText itemName = view.findViewById(R.id.editTextText);
+                EditText itemDescription = view.findViewById(R.id.editTextTextMultiLine);
+                EditText itemSpecifications = view.findViewById(R.id.editTextTextMultiLine2);
+                EditText itemPrice = view.findViewById(R.id.editTextNumberDecimal);
+                String name = itemName.getText().toString().trim();
+                String description = itemDescription.getText().toString().trim();
+                String specification = itemSpecifications.getText().toString().trim();
+                double price = Double.valueOf(itemPrice.getText().toString().trim());
+
+
+
             }
         });
 

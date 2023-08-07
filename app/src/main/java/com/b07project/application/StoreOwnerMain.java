@@ -13,6 +13,8 @@ import android.widget.Button;
 public class StoreOwnerMain extends AppCompatActivity {
 
     Button OrdersFragmentBtn, StoreOwnerViewMyShopBtn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,8 @@ public class StoreOwnerMain extends AppCompatActivity {
 
         OrdersFragmentBtn = findViewById(R.id.OwnerOrders);
         StoreOwnerViewMyShopBtn = findViewById(R.id.ViewMyShopButton);
+
+        String brand = getIntent().getStringExtra("brand");
 
         OrdersFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override

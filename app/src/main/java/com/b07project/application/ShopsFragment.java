@@ -14,6 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 /**
@@ -33,6 +38,8 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
     private String mParam2;
     private ArrayList<TestStore> storeArr;
     private RecyclerView shopsRecycler;
+
+    DatabaseReference ref = MainActivity.db.getReference("Owner");
 
     public ShopsFragment() {
         // Required empty public constructor
@@ -74,15 +81,42 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        dataInitialize();
+        //dataInitialize();
+        storeArr = new ArrayList<>();
 
         shopsRecycler = view.findViewById(R.id.ShopsRecyclerView);
         shopsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         shopsRecycler.setHasFixedSize(true);
-        //Take note of this line right below
         ShopsAdapter shopsAdapter = new ShopsAdapter(getContext(),storeArr,this);
         shopsRecycler.setAdapter(shopsAdapter);
-        shopsAdapter.notifyDataSetChanged();
+        //Take note of this line right below
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                storeArr.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String brand = dataSnapshot.getKey();
+                    TestStore store = new TestStore(brand);
+                    storeArr.add(store);
+
+                }
+                shopsAdapter.notifyDataSetChanged();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
 
     }
 

@@ -14,6 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 /**
@@ -32,6 +39,8 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
 
     private ArrayList<String> items;
     private RecyclerView itemsRecycler;
+
+    DatabaseReference ref = MainActivity.db.getReference("Items");
 
 
     public ShopperShopFragment() {
@@ -72,7 +81,8 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dataInitialize();
+        //dataInitialize();
+        items = new ArrayList<>();
 
         TextView ShopViewShopName = view.findViewById(R.id.BrandName);
         ShopViewShopName.setText(mParam1);
@@ -82,7 +92,30 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
         itemsRecycler.setHasFixedSize(true);
         ShopperShopAdapter shopperShopAdapter = new ShopperShopAdapter(getContext(), items, mParam1,this::ViewShopItemClick);
         itemsRecycler.setAdapter(shopperShopAdapter);
-        shopperShopAdapter.notifyDataSetChanged();
+
+
+        Query query = ref.orderByChild("Brand").equalTo(mParam1);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if ( snapshot.exists()){
+                    for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        String key = snapshot1.getKey();
+                        String item_name = snapshot1.child("Name").getValue(String.class);
+                        items.add(item_name);
+                    }
+                    shopperShopAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     private void dataInitialize(){
