@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StoreOwnerSignUpActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword, editTextBrand;
@@ -67,9 +69,12 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                                     Toast.makeText(StoreOwnerSignUpActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent intent = new Intent(StoreOwnerSignUpActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Owner");
+                                    ref.child(brand).setValue(email).addOnCompleteListener(v ->{
+                                        Intent intent = new Intent(StoreOwnerSignUpActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    });
                                 } else {
                                     Toast.makeText(StoreOwnerSignUpActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();

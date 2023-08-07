@@ -17,17 +17,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder> {
 
     private Order[] localDataSet;
     private Cart cartInstance;
-    private MyCartFragment frag;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView brand;
         private final TextView price;
         private final TextView name;
-        private final Button minus;
 
         public ViewHolder(View view) {
             super(view);
@@ -35,7 +33,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             brand = (TextView) view.findViewById(R.id.brand);
             price = (TextView) view.findViewById(R.id.price);
             name = (TextView) view.findViewById(R.id.productName);
-            minus = (Button) view.findViewById(R.id.minusButton);
+            view.findViewById(R.id.minusButton).setVisibility(View.GONE);
         }
 
         public TextView getBrand() {
@@ -48,18 +46,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             return name;
         }
 
-        public Button getMinus() {
-            return minus;
-        }
-
 
     }
 
-    public CartAdapter(Cart cart, MyCartFragment frag) {
+    public OrderDetailsAdapter(Cart cart) {
         this.localDataSet = new Order[cart.orders.size()];
         this.localDataSet = cart.orders.toArray(this.localDataSet);
         this.cartInstance = cart;
-        this.frag = frag;
     }
 
     @Override
@@ -75,16 +68,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         viewHolder.getBrand().setText(localDataSet[position].brand);
         viewHolder.getName().setText(localDataSet[position].i_name);
-        viewHolder.getPrice().setText("$" + String.valueOf(localDataSet[position].price));
-        viewHolder.getMinus().setOnClickListener(v -> {
-            cartInstance.orders.remove (position);
-            //cartInstance.orderID.remove (position);
-            localDataSet = new Order[cartInstance.orders.size()];
-            localDataSet = cartInstance.orders.toArray(localDataSet);
-            notifyDataSetChanged();
-            frag.setTotal(cartInstance.totalPrice());
-            //TODO: Database access and saving required here since cart has removed an item (Backend people)
-        });
+        viewHolder.getPrice().setText("$" + String.valueOf(cartInstance.totalPrice()));
     }
 
     @Override

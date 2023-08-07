@@ -16,21 +16,26 @@ import java.util.List;
 public class OrdersFragment extends Fragment {
 
     private RecyclerView ordersRecyclerView;
+    String brand;
+    Order[] orders;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_orders, container, false);
-
-        //for testing
-
+        this.brand = ((StoreOwnerMain) getActivity()).getBrand();
+        //TODO: Perform a database fetch using the brand as a query parameter once success callback is called please create an array with each order object
+        //TODO: initialize the 'orders' array with the information from database after array creation please call initList();
         ordersRecyclerView = rootView.findViewById(R.id.ordersRecyclerView);
         ordersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        OrdersAdapter adapter = new OrdersAdapter(createSampleOrders());
-        ordersRecyclerView.setAdapter(adapter);
         return rootView;
     }
     //for testing
+    public void initList ()
+    {
+        OrdersAdapter adapter = new OrdersAdapter(orders);
+        ordersRecyclerView.setAdapter(adapter);
+    }
     private Order[] createSampleOrders() {
         List<Order> orders = new ArrayList<>();
         orders.add (new Order ("bob1", "mike", "shoe", "Completed",  0));

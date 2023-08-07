@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHolder> {
 
-    private Order[] localDataSet;
+    private Cart[] localDataSet;
+    private ShopperMain s;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView orderNum;
@@ -38,8 +39,9 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
         }
     }
 
-    public MyOrdersAdapter(Order[] dataSet) {
+    public MyOrdersAdapter(Cart[] dataSet, ShopperMain s) {
         localDataSet = dataSet;
+        this.s = s;
     }
 
     @Override
@@ -53,10 +55,12 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        viewHolder.getOrderNum().setText(String.valueOf (localDataSet[position].price));
+        viewHolder.getOrderNum().setText(localDataSet[position].orderID.toString());
         viewHolder.getStatus().setText(localDataSet[position].status);
         viewHolder.getRoot().setOnClickListener(v -> {
-            FragmentManager fragmentManager = ((AppCompatActivity) viewHolder.getRoot().getContext()).getSupportFragmentManager();
+            s.setPasser(localDataSet[position]);
+            s.setOrderAdapter(this);
+            FragmentManager fragmentManager = s.getSupportFragmentManager();
             Fragment orderDetailsFragment = new orderDetailsFragment();
             fragmentManager.beginTransaction()
                     .replace(R.id.frameLayout, orderDetailsFragment)
@@ -69,5 +73,6 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
     public int getItemCount() {
         return localDataSet.length;
     }
+
 }
 

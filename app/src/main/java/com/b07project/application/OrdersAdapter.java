@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
-// pass in a brand?
     private Order[] localDataSet;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -74,6 +73,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 viewHolder.getCompleteButton().setEnabled(false);
                 viewHolder.getCompleteButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
+                //TODO: Perform database access here to mark the localDataSet[position] order object to the 'Completed' status
                 viewHolder.getCompleteButton().setOnClickListener(null);
             });
         }
@@ -92,6 +92,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 viewHolder.getCanceledButton().setEnabled(false);
                 viewHolder.getCanceledButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
+                //TODO: Perform database access here to mark the localDataSet[position] order object to the 'Canceled' status
                 viewHolder.getCanceledButton().setOnClickListener(null);
             });
 
@@ -103,12 +104,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 viewHolder.getCompleteButton().setEnabled(false);
                 viewHolder.getCompleteButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
+                //TODO: Perform database access here to mark the localDataSet[position] order object to the 'Completed' status
                 viewHolder.getCanceledButton().setOnClickListener(null);
                 viewHolder.getCompleteButton().setOnClickListener(null);
             });
         }
         viewHolder.getRoot().setOnClickListener(v -> {
-            //do onclick stuff in here idk order details not implement
+
         });
     }
 

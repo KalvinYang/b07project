@@ -3,11 +3,15 @@ package com.b07project.application;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +28,9 @@ public class orderDetailsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public Cart c;
+    public OrderDetailsAdapter adapter;
+    private RecyclerView recycle;
 
     public orderDetailsFragment() {
         // Required empty public constructor
@@ -61,15 +68,34 @@ public class orderDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_orderdetails, container, false);
-
+        c = ((ShopperMain) getActivity()).getPasser();
         Button cancelButton = view.findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Order.cancelOrder();
-                cancelButton.setVisibility(View.GONE);
-            }
+        TextView status = view.findViewById(R.id.statusTxt);
+        ImageView back = view.findViewById(R.id.backBtn);
+        TextView price = view.findViewById(R.id.totalTxt);
+        String formattedString = String.format("%.2f", c.totalPrice());
+        price.setText("$" + formattedString);
+        back.setOnClickListener(v ->{
+            getActivity().onBackPressed();
         });
+        recycle = view.findViewById(R.id.funnyCart);
+        recycle.setLayoutManager(new LinearLayoutManager(getActivity()));
+        OrderDetailsAdapter adapter = new OrderDetailsAdapter(c);
+        recycle.setAdapter(adapter);
+        status.setText(c.status);
+        if (!c.status.equals("Canceled"))
+        {
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    status.setText("Canceled");
+                    c.cancelCart();
+                    cancelButton.setVisibility(View.GONE);
+                    ((ShopperMain) getActivity()).refreshOrderAdapter();
+                }
+            });
+        }
+        else cancelButton.setVisibility(View.GONE);
         return view;
     }
 }
