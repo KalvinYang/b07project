@@ -17,12 +17,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 
 public class StoreOwnerSignUpActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword, editTextBrand;
     Button SignUpButton;
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
+
+    private DatabaseReference ref = MainActivity.db.getReference("Owner");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                                     Toast.makeText(StoreOwnerSignUpActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    ref.child(brand).setValue(email);
                                     Intent intent = new Intent(StoreOwnerSignUpActivity.this, LoginActivity.class);
                                     startActivity(intent);
                                     finish();

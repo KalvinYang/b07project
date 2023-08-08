@@ -33,10 +33,8 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-
     // TODO: Rename and change types of parameters
     private String mParam1;
-
     private ArrayList<String> items;
     private RecyclerView itemsRecycler;
 
@@ -90,7 +88,7 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
         itemsRecycler = view.findViewById(R.id.StorePageRecyclerView);
         itemsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         itemsRecycler.setHasFixedSize(true);
-        ShopperShopAdapter shopperShopAdapter = new ShopperShopAdapter(getContext(), items, mParam1,this::ViewShopItemClick);
+        ShopperShopAdapter shopperShopAdapter = new ShopperShopAdapter(getContext(), items,this::ViewShopItemClick);
         itemsRecycler.setAdapter(shopperShopAdapter);
 
 
@@ -124,23 +122,16 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
         items.add("item1");
         items.add("item2");
         items.add("item3");
-        items.add("item1");
-        items.add("item2");
-        items.add("item3");
-        items.add("item1");
-        items.add("item2");
-        items.add("item3");
-        items.add("item1");
-        items.add("item2");
-        items.add("item3");
-        items.add("item1");
-        items.add("item2");
-        items.add("item3");
+        items.add("item4");
+        items.add("item5");
+        items.add("item6");
+        items.add("item7");
+        items.add("item8");
     }
 
     @Override
-    public void ViewShopItemClick(String ViewStoreItemName, String ViewStoreItemBrand) {
-        Fragment fragment = ShopperShpItemFragment.newInstance(ViewStoreItemName,ViewStoreItemBrand);
+    public void ViewShopItemClick(String ViewStoreItemName) {
+        Fragment fragment = ShopperShpItemFragment.newInstance(ViewStoreItemName);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.ShopperFrameLayout, fragment, "ShopperViewShopItemView");
         transaction.addToBackStack(null);

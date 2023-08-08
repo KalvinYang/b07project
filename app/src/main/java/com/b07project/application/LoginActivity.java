@@ -82,8 +82,10 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             boolean isShopOwner = snapshot.getValue() != null;
                             String brand = "";
-                            if(isShopOwner) {
-                                brand = snapshot.getKey();
+                            if (isShopOwner) {
+                                for (DataSnapshot sn : snapshot.getChildren()) {
+                                    brand = sn.getKey();
+                                }
                             }
                             Navigate(isShopOwner, brand);
                         }
@@ -105,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent;
         if (isShopOwner){
             intent = new Intent(LoginActivity.this, StoreOwnerMain.class);
-            intent.putExtra("brand", brand);
+            intent.putExtra("ninjago", brand);
         }
         else{
             intent = new Intent(LoginActivity.this, ShopperMain.class);

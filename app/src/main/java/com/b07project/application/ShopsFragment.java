@@ -102,9 +102,6 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
 
                 }
                 shopsAdapter.notifyDataSetChanged();
-
-
-
             }
 
             @Override

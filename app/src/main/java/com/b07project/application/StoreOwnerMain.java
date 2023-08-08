@@ -9,10 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class StoreOwnerMain extends AppCompatActivity {
 
     Button OrdersFragmentBtn, StoreOwnerViewMyShopBtn;
+    TextView storeOwner;
 
 
     @Override
@@ -22,25 +24,36 @@ public class StoreOwnerMain extends AppCompatActivity {
 
         OrdersFragmentBtn = findViewById(R.id.OwnerOrders);
         StoreOwnerViewMyShopBtn = findViewById(R.id.ViewMyShopButton);
+        storeOwner = findViewById(R.id.StoreOwnerMainTitle);
 
-        String brand = getIntent().getStringExtra("brand");
+        String gandum = getIntent().getStringExtra("ninjago");
+
+        storeOwner.setText(gandum);
 
         OrdersFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new OrdersFragment());
+                replacetoMyOrderFragment(new OrdersFragment());
             }
         });
 
         StoreOwnerViewMyShopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new MyShopFragment());
+                replacetoMyShopFragment(new MyShopFragment(), gandum);
             }
         });
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replacetoMyShopFragment(Fragment fragment, String brand){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = MyShopFragment.newInstance(brand);
+        fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void replacetoMyOrderFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);

@@ -16,12 +16,14 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
 
     Context context;
     ArrayList<String> Myitems;
+    String brand;
     private MyShopEditItemClickListener editItemClickListener;
 
 
-    public MyShopAdapter(Context context, ArrayList<String> Myitems, MyShopEditItemClickListener editItemClickListener){
+    public MyShopAdapter(Context context, ArrayList<String> Myitems, String brand, MyShopEditItemClickListener editItemClickListener){
         this.context = context;
         this.Myitems = Myitems;
+        this.brand = brand;
         this. editItemClickListener = editItemClickListener;
     }
 
@@ -39,7 +41,7 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
         holder.EditMyItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editItemClickListener.editItemClick(item);
+                editItemClickListener.editItemClick(item, brand);
             }
         });
     }
@@ -62,6 +64,6 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
     }
 
     public interface MyShopEditItemClickListener{
-        public void editItemClick(String item);
+        public void editItemClick(String item, String brand);
     }
 }
