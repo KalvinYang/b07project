@@ -13,10 +13,10 @@
         app:layout_constraintBottom_toTopOf="@+id/OwnerOrders"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StoreOwnerMainTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreOwnerMain" />
 
     <TextView
-        android:id="@+id/StoreOwnerMainTitle"
+        android:id="@+id/StoreOwnerMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"

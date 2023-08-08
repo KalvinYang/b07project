@@ -1,5 +1,7 @@
 package com.b07project.application;
 
+import static android.content.Intent.getIntent;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,11 +21,17 @@ public class OrdersFragment extends Fragment {
     String brand;
     Order[] orders;
 
+    public static OrdersFragment newInstance(String brand){
+        OrdersFragment fragment = new OrdersFragment();
+        fragment.brand = brand;
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_orders, container, false);
-        this.brand = ((StoreOwnerMain) getActivity()).getBrand();
+        //this.brand = "OOFUS";//((StoreOwnerMain) getActivity()).getBrand();
         //TODO: Perform a database fetch using the brand as a query parameter once success callback is called please create an array with each order object
         //TODO: initialize the 'orders' array with the information from database after array creation please call initList();
         ordersRecyclerView = rootView.findViewById(R.id.ordersRecyclerView);

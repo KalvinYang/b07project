@@ -9,14 +9,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.google.firebase.auth.FirebaseAuth;
+import android.widget.TextView;
 
 public class ShopperMain extends AppCompatActivity {
 
     Button MyCartFragmentBtn, MyOrdersFragmentBtn, ShopsFragmentBtn;
+    TextView shopperMainTitle;
     private Cart passer;
     private MyOrdersAdapter adapter;
+    String UserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public class ShopperMain extends AppCompatActivity {
         MyCartFragmentBtn = findViewById(R.id.MyCartButton);
         MyOrdersFragmentBtn = findViewById(R.id.OwnerOrders);
         ShopsFragmentBtn = findViewById(R.id.ShopButton);
+        shopperMainTitle = findViewById(R.id.ShopperMainTitle);
+        UserEmail = getIntent().getStringExtra("UserEmail");
+        shopperMainTitle.setText(UserEmail);
 
         MyCartFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override

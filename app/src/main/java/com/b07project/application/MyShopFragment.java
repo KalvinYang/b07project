@@ -21,8 +21,14 @@ import android.widget.TextView;
 import com.b07project.application.databinding.FragmentFirstBinding;
 import com.b07project.application.databinding.FragmentMyShopBinding;
 import com.b07project.application.databinding.MyShopRowBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.function.ObjIntConsumer;
 
 /**
@@ -32,6 +38,7 @@ import java.util.function.ObjIntConsumer;
  */
 public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEditItemClickListener {
 
+    private DatabaseReference ref = MainActivity.db.getReference("Item");
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,7 +48,7 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
     private String mParam1;
     //private String mParam2;
 
-    private ArrayList<String> items;
+    private ArrayList<String> items = new ArrayList<>();
     private RecyclerView myShopRecyclerView;
     public MyShopFragment(/*String brand*/) {
         // Required empty public constructor
@@ -82,6 +89,7 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
         Button additemtomyshopbutton =view.findViewById(R.id.MyShopAddItemToStoreButton);
         TextView shoptile = view.findViewById(R.id.MyShopTitle);
         shoptile.setText(mParam1);
+
         additemtomyshopbutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -100,23 +108,58 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        dataInitialize();
+        //dataInitialize();
+
         myShopRecyclerView = view.findViewById(R.id.MyShopPageRecyclerView);
         myShopRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         myShopRecyclerView.setHasFixedSize(true);
-        MyShopAdapter myshopAdapter = new MyShopAdapter(getContext(), items, mParam1, this::editItemClick);
-        myShopRecyclerView.setAdapter(myshopAdapter);
-        myshopAdapter.notifyDataSetChanged();
+
+        Query query = ref.orderByChild("brand").equalTo(mParam1);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ref.child("testing2").setValue(snapshot.getValue());
+                for(DataSnapshot sn : snapshot.getChildren()){
+                    String name = sn.child("name").getValue(String.class);
+                    items.add(name);
+                }
+
+                MyShopAdapter myshopAdapter = new MyShopAdapter(getContext(), items, mParam1, MyShopFragment.this);
+                myShopRecyclerView.setAdapter(myshopAdapter);
+                myshopAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
     }
 
     private void dataInitialize(){
-        items = new ArrayList<>();
-        items.add("Shoes");
+        //items = new ArrayList<>();
+        Query query = ref.orderByChild("brand").equalTo(mParam1);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot sn : snapshot.getChildren()){
+                    String name = sn.child("name").getValue(String.class);
+                    items.add(name);
+                    ref.child("testing2").setValue(name);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        /*items.add("item 1");
         items.add("item 2");
         items.add("item 3");
         items.add("item 4");
         items.add("item 5");
-        items.add("item 6");
+        items.add("item 6");*/
     }
 
     @Override
