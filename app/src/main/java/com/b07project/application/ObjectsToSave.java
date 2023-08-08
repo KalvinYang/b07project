@@ -8,19 +8,18 @@ abstract class ObjectsToSave {
 
     DatabaseReference ref;
 
-
-
-    ObjectsToSave(Class cName) {ref = MainActivity.db.getReference(cName.getSimpleName());}
+    ObjectsToSave(Class cName) {
+        ref = MainActivity.db.getReference(cName.getSimpleName());
+    }
 
     ObjectsToSave() {
     }
 
     abstract Map<String, Object> createHashMap();
 
-    public String updateObject(Map<String, Object> map) {
-        String ref2 = ref.push().getKey();
-        ref.child(ref2).updateChildren(map);
-        return ref2;
+    public void updateObject(String key, Map<String, Object> map) {
+        MainActivity.db.getReference().child("Status").setValue("Trying");
+        ref.child(key).updateChildren(map);
     }
     public String saveObject(Map<String, Object> map) {
         String ref2 = ref.push().getKey();

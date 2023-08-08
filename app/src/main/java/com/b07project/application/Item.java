@@ -14,7 +14,7 @@ import java.util.Map;
 public class Item extends ObjectsToSave{
     String name;
     String description;
-    Float price;
+    float price;
     String brand;
     String specifications;
     private String key;
@@ -24,7 +24,7 @@ public class Item extends ObjectsToSave{
     DatabaseReference ref = MainActivity.db.getReference("Item");
 
     Item(){
-
+        super(Item.class);
     }
 
     Item(String name, String description, Float price, String brand, String specifications) {
@@ -58,8 +58,8 @@ public class Item extends ObjectsToSave{
         this.specifications = specifications;
     }
 
-    void updateItem(){
-        updateObject(createHashMap());
+    void updateItem(String key){
+        updateObject(key, createHashMap());
     }
     void saveItem() {
         saveObject(createHashMap());
@@ -94,6 +94,7 @@ public class Item extends ObjectsToSave{
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
 
     }
 
