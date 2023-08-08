@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +34,7 @@ public class AddItemFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
+     *=
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment AddItemFragment.
@@ -64,12 +65,18 @@ public class AddItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_item, container, false);
         Button backtomyshopbutton = view.findViewById(R.id.AddItemBackButton);
         Button additembutton = view.findViewById(R.id.AddItemToStoreButton);
+        EditText itemName = view.findViewById(R.id.editTextText);
+        EditText itemDescription = view.findViewById(R.id.editTextTextMultiLine);
+        EditText itemSpecifications = view.findViewById(R.id.editTextTextMultiLine2);
+        EditText itemPrice = view.findViewById(R.id.editTextNumberDecimal);
+        itemName.setText("");
 
         backtomyshopbutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.StoreOwnerFrameLayout, new MyShopFragment());
+                MyShopFragment fragment = MyShopFragment.newInstance(mParam1);
+                fr.replace(R.id.StoreOwnerFrameLayout, fragment);
                 fr.commit();
             }
         });
@@ -77,7 +84,17 @@ public class AddItemFragment extends Fragment {
         additembutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Adds an item to the store
+                // TODO Adds an item to the store
+                String name = itemName.getText().toString().trim();
+                String description = itemDescription.getText().toString().trim();
+                String specification = itemSpecifications.getText().toString().trim();
+                Float price = Float.valueOf(itemPrice.getText().toString().trim());
+
+                Item item = new Item(name, description, price, mParam1, specification);
+                item.saveItem();
+
+                //go back to previous page
+
             }
         });
 

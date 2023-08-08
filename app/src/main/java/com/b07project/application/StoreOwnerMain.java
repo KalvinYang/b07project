@@ -1,6 +1,5 @@
 package com.b07project.application;
 
-import androidx.annotation.Keep;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,11 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class StoreOwnerMain extends AppCompatActivity {
 
     Button OrdersFragmentBtn, StoreOwnerViewMyShopBtn;
-    String brand;
+    TextView storeOwner;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,33 +24,40 @@ public class StoreOwnerMain extends AppCompatActivity {
 
         OrdersFragmentBtn = findViewById(R.id.OwnerOrders);
         StoreOwnerViewMyShopBtn = findViewById(R.id.ViewMyShopButton);
-        //TODO: Hook database to fetch the brand associated with the current store owner.
-        //TODO: Keep in mind Firebase accesses are Asynch so please synchronize the brand fetch before proceeding otherwise crashes will occur in later brand accesses.
+        storeOwner = findViewById(R.id.StoreOwnerMainTitle);
 
-        //this.brand = ;
+        String gandum = getIntent().getStringExtra("ninjago");
+
+        storeOwner.setText(gandum);
 
         OrdersFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new OrdersFragment());
+                replacetoMyOrderFragment(new OrdersFragment());
             }
         });
 
         StoreOwnerViewMyShopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new MyShopFragment());
+                replacetoMyShopFragment(new MyShopFragment(), gandum);
             }
         });
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replacetoMyShopFragment(Fragment fragment, String brand){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = MyShopFragment.newInstance(brand);
+        fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void replacetoMyOrderFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);
         fragmentTransaction.commit();
     }
-    public String getBrand(){
-        return this.brand;
-    }
+
 }

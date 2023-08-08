@@ -16,13 +16,13 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
 
     Context context;
     ArrayList<String> items;
-    String brand;
+    //String brand;
     private ViewShopItemClickListener viewShopItemClickListener;
 
-    public ShopperShopAdapter(Context context, ArrayList<String> items, String brand, ViewShopItemClickListener viewShopItemClickListener){
+    public ShopperShopAdapter(Context context, ArrayList<String> items, /*String brand,*/ ViewShopItemClickListener viewShopItemClickListener){
         this.context = context;
         this.items = items;
-        this.brand = brand;
+        //this.brand = brand;
         this.viewShopItemClickListener = viewShopItemClickListener;
     }
 
@@ -41,7 +41,7 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
         holder.viewItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewShopItemClickListener.ViewShopItemClick(item,brand);
+                viewShopItemClickListener.ViewShopItemClick(item);
             }
         });
     }
@@ -64,7 +64,7 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
     }
 
     public interface ViewShopItemClickListener{
-        public void ViewShopItemClick(String ViewStoreItemName, String ViewStoreItemBrand);
+        public void ViewShopItemClick(String ViewStoreItemName);
     }
 
 }

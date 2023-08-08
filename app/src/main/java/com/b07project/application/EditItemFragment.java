@@ -11,7 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,9 +30,13 @@ public class EditItemFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
+    private String mParam2;
+
+    DatabaseReference ref = MainActivity.db.getReference("Item");
 
     public EditItemFragment() {
         // Required empty public constructor
@@ -39,11 +50,11 @@ public class EditItemFragment extends Fragment {
      * @return A new instance of fragment EditItemFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditItemFragment newInstance(String param1) {
+    public static EditItemFragment newInstance(String param1, String param2) {
         EditItemFragment fragment = new EditItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,7 +64,7 @@ public class EditItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -61,14 +72,54 @@ public class EditItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
+
         View view = inflater.inflate(R.layout.fragment_edit_item, container, false);
         Button BacktoMyShopButton = view.findViewById(R.id.EditItemBackButton);
         Button EditShopItemButton = view.findViewById(R.id.EditItemToStoreButton);
+
+        EditText editItemName = view.findViewById(R.id.EditItemName);
+        EditText editDescription = view.findViewById(R.id.EditItemDescription);
+        EditText editSpecification = view.findViewById(R.id.EditItemSpecification);
+        EditText editPrice = view.findViewById(R.id.EditItemPrice);
+        Item i = new Item();
+        //i.findItem(mParam1,mParam2);
+
+        Query query = ref.orderByChild("brand").equalTo(mParam2);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        if (mParam1.equals(snapshot1.child("name").getValue(String.class))) {
+                            MainActivity.db.getReference().child("Status").setValue(snapshot1.child("description").getValue(String.class));
+                            i.name = mParam1;
+                            i.brand = mParam2;
+                            i.description = snapshot1.child("description").getValue(String.class);
+                            i.specifications = snapshot1.child("specifications").getValue(String.class);
+                            i.price = Float.parseFloat(snapshot1.child("price").getValue(String.class));
+                            editItemName.setText(i.name);
+                            editDescription.setText(i.description);
+                            editSpecification.setText(i.specifications);
+                            editPrice.setText(String.valueOf(i.price));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
         BacktoMyShopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.StoreOwnerFrameLayout, new MyShopFragment());
+                MyShopFragment fragment = MyShopFragment.newInstance(mParam2);
+                fr.replace(R.id.StoreOwnerFrameLayout, fragment);
                 fr.commit();
             }
         });
@@ -76,7 +127,23 @@ public class EditItemFragment extends Fragment {
         EditShopItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Something to edit the store's items
+                //TODO Something to edit the store's items mparam1 = itemName, mparam2 = brand
+                if ( !(i.name.equals(editItemName.getText().toString().trim()))){
+                    i.name = editItemName.getText().toString().trim();
+                }
+                if (!(i.specifications.equals(editSpecification.getText().toString().trim()))){
+                    i.specifications = editSpecification.getText().toString().trim();
+                }
+                if(!(i.description.equals(editDescription.getText().toString().trim()))){
+                    i.description = editDescription.getText().toString().trim();
+                }
+                if(!(i.price == Float.parseFloat((editPrice.getText().toString().trim())))){
+                    i.price = Float.parseFloat((editPrice.getText().toString().trim()));
+                }
+                i.updateItem();
+
+
+
             }
         });
 
@@ -89,4 +156,6 @@ public class EditItemFragment extends Fragment {
         TextView editItemTitle = view.findViewById(R.id.EditItemTitle);
         editItemTitle.setText("Edit: " + mParam1);
     }
+
+
 }
