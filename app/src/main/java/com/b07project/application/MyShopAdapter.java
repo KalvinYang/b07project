@@ -44,6 +44,12 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
                 editItemClickListener.editItemClick(item, brand);
             }
         });
+        holder.RemoveItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { Item.deleteobject(item, brand);
+
+            }
+        });
     }
 
     @Override

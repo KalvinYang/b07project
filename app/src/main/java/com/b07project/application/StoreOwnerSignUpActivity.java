@@ -58,9 +58,7 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                     Toast.makeText(StoreOwnerSignUpActivity.this, "Enter brand name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 progressBar.setVisibility(View.VISIBLE);
-
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
