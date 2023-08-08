@@ -13,9 +13,6 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".NavToShopperOrStoreOwner"
-            android:exported="false" />
-        <activity
             android:name=".ShopperMain"
             android:exported="false" />
         <activity

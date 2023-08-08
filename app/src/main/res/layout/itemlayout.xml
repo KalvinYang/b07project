@@ -68,25 +68,13 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout5"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/plusButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:backgroundTint="#FDFDFD"
-            android:text="+"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:typeface="serif"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/count"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:fontFamily="serif"
-            android:text="0"
+            android:text="1"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/plusButton"

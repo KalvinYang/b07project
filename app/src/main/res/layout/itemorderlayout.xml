@@ -9,10 +9,12 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/orderNum"
+        android:id="@+id/orderKey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
         android:fontFamily="serif"
+        android:maxLines="1"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +33,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderNum" />
+        app:layout_constraintTop_toBottomOf="@+id/orderKey" />
 
 </LinearLayout>

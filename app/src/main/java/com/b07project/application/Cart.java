@@ -69,4 +69,12 @@ public class Cart extends ObjectsToSave{
         }
         return map;
     }
+
+    public void cancelCart ()
+    {
+        for (Order i:this.orders)
+            i.cancelOrder();
+        status = "Canceled";
+        saveObject(createHashMap());
+    }
 }

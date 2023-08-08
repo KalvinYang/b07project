@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ShopperMain extends AppCompatActivity {
 
     Button MyCartFragmentBtn, MyOrdersFragmentBtn, ShopsFragmentBtn;
+    private Cart passer;
+    private MyOrdersAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,5 +61,20 @@ public class ShopperMain extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+    public void setPasser (Cart c)
+    {
+        this.passer = c;
+    }
+    public Cart getPasser ()
+    {
+        return this.passer;
+    }
 
+    public void refreshOrderAdapter (){
+        this.adapter.notifyDataSetChanged();
+    }
+    public void setOrderAdapter (MyOrdersAdapter adapter)
+    {
+        this.adapter = adapter;
+    }
 }
