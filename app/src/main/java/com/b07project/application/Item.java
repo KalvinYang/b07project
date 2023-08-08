@@ -21,7 +21,13 @@ public class Item extends ObjectsToSave{
 
     //image field may be introduced
 
-    Item(String name, String description, float price, String brand, String specifications) {
+    DatabaseReference ref = MainActivity.db.getReference("Item");
+
+    Item(){
+        super(Item.class);
+    }
+
+    Item(String name, String description, Float price, String brand, String specifications) {
         super(Item.class);
         this.name = name;
         this.description = description;
@@ -40,7 +46,7 @@ public class Item extends ObjectsToSave{
         this.description = description;
     }
 
-    void Modify_price(float price){
+    void Modify_price(Float price){
         this.price = price;
     }
 
@@ -52,25 +58,34 @@ public class Item extends ObjectsToSave{
         this.specifications = specifications;
     }
 
-    void updateItem(){
-        updateObject(createHashMap());
+    void updateItem(String key){
+        updateObject(key, createHashMap());
     }
     void saveItem() {
         saveObject(createHashMap());
     }
 
-    public static void deleteobject(String name, String brand){
-        DatabaseReference ref = MainActivity.db.getReference("Item");
-        Query query = ref.orderByChild("name").equalTo(name);
+    public void deleteobject(){
+        //this.findItem();
+        ref.child(key).removeValue();
+    }
+
+    public void findItem(String name, String brand) {
+
+        Query query = ref.orderByChild("brand").equalTo(brand);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //ref.child("testing1").setValue(snapshot.toString());
-
-                for(DataSnapshot sn : snapshot.getChildren()) {
-                    if (sn.child("brand").getValue().equals(brand)) {
-                        String key = sn.getKey();
-                        ref.child(key).removeValue();
+                if (snapshot.exists()) {
+                    for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        if (name.equals(snapshot1.child("name").getValue(String.class))) {
+                            MainActivity.db.getReference().child("Status").setValue(snapshot1.child("description").getValue(String.class));
+                            Item.this.name = name;
+                            Item.this.brand = brand;
+                            Item.this.description = snapshot1.child("description").getValue(String.class);
+                            Item.this.specifications = snapshot1.child("specifications").getValue(String.class);
+                            Item.this.price = Float.parseFloat(snapshot1.child("price").getValue(String.class));
+                        }
                     }
                 }
             }
@@ -79,7 +94,10 @@ public class Item extends ObjectsToSave{
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+
     }
+
 
 
     @Override

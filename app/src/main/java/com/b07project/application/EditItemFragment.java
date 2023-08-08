@@ -38,6 +38,8 @@ public class EditItemFragment extends Fragment {
 
     DatabaseReference ref = MainActivity.db.getReference("Item");
 
+    private String key;
+
     public EditItemFragment() {
         // Required empty public constructor
     }
@@ -72,6 +74,9 @@ public class EditItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
+
         View view = inflater.inflate(R.layout.fragment_edit_item, container, false);
         Button BacktoMyShopButton = view.findViewById(R.id.EditItemBackButton);
         Button EditShopItemButton = view.findViewById(R.id.EditItemToStoreButton);
@@ -80,26 +85,32 @@ public class EditItemFragment extends Fragment {
         EditText editDescription = view.findViewById(R.id.EditItemDescription);
         EditText editSpecification = view.findViewById(R.id.EditItemSpecification);
         EditText editPrice = view.findViewById(R.id.EditItemPrice);
-        /*Item i = new Item();
-        i.findItem(mParam1,mParam2);*/
+        Item i = new Item();
+        //i.findItem(mParam1,mParam2);
 
-        Query query = ref.orderByChild("brand").equalTo(mParam2);
+        Query query = ref.orderByChild("name").equalTo(mParam1);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
-                        if (mParam1.equals(snapshot1.child("name").getValue(String.class))) {
-                            /*MainActivity.db.getReference().child("Status").setValue(snapshot1.child("description").getValue(String.class));
+                        key = snapshot1.getKey();
+                        if (mParam2.equals(snapshot1.child("brand").getValue(String.class))) {
                             i.name = mParam1;
                             i.brand = mParam2;
                             i.description = snapshot1.child("description").getValue(String.class);
                             i.specifications = snapshot1.child("specifications").getValue(String.class);
-                            i.price = Float.parseFloat(snapshot1.child("price").getValue(String.class));
+                            i.price = snapshot1.child("price").getValue(float.class);
+
+
+
                             editItemName.setText(i.name);
                             editDescription.setText(i.description);
                             editSpecification.setText(i.specifications);
-                            editPrice.setText(String.valueOf(i.price));*/
+                            editPrice.setText(String.valueOf(i.price));
+
+
+
                         }
                     }
                 }
@@ -109,6 +120,9 @@ public class EditItemFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+
+
 
         BacktoMyShopButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,19 +138,18 @@ public class EditItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //TODO Something to edit the store's items mparam1 = itemName, mparam2 = brand
-                /*if ( !(i.name.equals(editItemName.getText().toString().trim()))){
-                    i.name = editItemName.getText().toString().trim();
-                }
-                if (!(i.specifications.equals(editSpecification.getText().toString().trim()))){
-                    i.specifications = editSpecification.getText().toString().trim();
-                }
-                if(!(i.description.equals(editDescription.getText().toString().trim()))){
-                    i.description = editDescription.getText().toString().trim();
-                }
-                if(!(i.price == Float.parseFloat((editPrice.getText().toString().trim())))){
-                    i.price = Float.parseFloat((editPrice.getText().toString().trim()));
-                }
-                i.updateItem();*/
+                i.name = editItemName.getText().toString().trim();
+                i.specifications = editSpecification.getText().toString().trim();
+                i.description = editDescription.getText().toString().trim();
+                i.price = Float.parseFloat((editPrice.getText().toString().trim()));
+
+                i.updateItem(key);
+
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                MyShopFragment fragment = MyShopFragment.newInstance(mParam2);
+                fr.replace(R.id.StoreOwnerFrameLayout, fragment);
+                fr.commit();
+
             }
         });
 
@@ -149,4 +162,6 @@ public class EditItemFragment extends Fragment {
         TextView editItemTitle = view.findViewById(R.id.EditItemTitle);
         editItemTitle.setText("Edit: " + mParam1);
     }
+
+
 }
