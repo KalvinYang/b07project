@@ -17,7 +17,7 @@ public class ShopperMain extends AppCompatActivity {
     TextView shopperMainTitle;
     private Cart passer;
     private MyOrdersAdapter adapter;
-    String UserEmail;
+    public static String UserEmail; //= getIntent().getStringExtra("UserEmail");;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class ShopperMain extends AppCompatActivity {
         ShopsFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new ShopsFragment());
+                replaceShopFragment(new ShopsFragment(), UserEmail);
             }
         });
 
@@ -57,6 +57,14 @@ public class ShopperMain extends AppCompatActivity {
     public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.ShopperFrameLayout,fragment);
+        fragmentTransaction.commit();
+    }
+
+    public void replaceShopFragment(Fragment fragment, String UserEmail){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = ShopsFragment.newInstance(UserEmail);
         fragmentTransaction.replace(R.id.ShopperFrameLayout,fragment);
         fragmentTransaction.commit();
     }

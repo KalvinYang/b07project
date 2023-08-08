@@ -17,6 +17,14 @@ import java.util.List;
 public class MyOrdersFragment extends Fragment {
     private RecyclerView ordersRecyclerView;
     Cart[] list;
+    String brand;
+
+    public static MyOrdersFragment newInstance(String brand){
+        MyOrdersFragment fragment = new MyOrdersFragment();
+        fragment.brand = brand;
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
