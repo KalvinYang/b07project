@@ -38,7 +38,7 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
     private ArrayList<String> items;
     private RecyclerView itemsRecycler;
 
-    DatabaseReference ref = MainActivity.db.getReference("Items");
+    DatabaseReference ref = MainActivity.db.getReference("Item");
 
 
     public ShopperShopFragment() {
@@ -92,7 +92,7 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
         itemsRecycler.setAdapter(shopperShopAdapter);
 
 
-        Query query = ref.orderByChild("Brand").equalTo(mParam1);
+        Query query = ref.orderByChild("brand").equalTo(mParam1);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -100,7 +100,7 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
                 if ( snapshot.exists()){
                     for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
                         String key = snapshot1.getKey();
-                        String item_name = snapshot1.child("Name").getValue(String.class);
+                        String item_name = snapshot1.child("name").getValue(String.class);
                         items.add(item_name);
                     }
                     shopperShopAdapter.notifyDataSetChanged();

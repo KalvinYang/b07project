@@ -14,16 +14,20 @@ import java.util.Map;
 public class Item extends ObjectsToSave{
     String name;
     String description;
-    float price;
+    Double price;
     String brand;
     String specifications;
     private String key;
 
     //image field may be introduced
 
-    DatabaseReference ref = MainActivity.db.getReference("Items");
+    DatabaseReference ref = MainActivity.db.getReference("Item");
 
-    Item(String name, String description, float price, String brand, String specifications) {
+    Item(){
+
+    }
+
+    Item(String name, String description, Double price, String brand, String specifications) {
         super(Item.class);
         this.name = name;
         this.description = description;
@@ -42,7 +46,7 @@ public class Item extends ObjectsToSave{
         this.description = description;
     }
 
-    void Modify_price(float price){
+    void Modify_price(Double price){
         this.price = price;
     }
 
@@ -62,23 +66,37 @@ public class Item extends ObjectsToSave{
     }
 
     public void deleteobject(){
-        this.findItem();
+        //this.findItem();
         ref.child(key).removeValue();
     }
 
-    public void findItem() {
-        Query query = ref.equalTo("brand",this.brand).equalTo("name",this.name);
+    public void findItem(String name, String brand) {
+
+        Query query = ref.orderByChild("brand").equalTo(brand);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                key = snapshot.getKey();
+                if (snapshot.exists()) {
+                    for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        if (name.equals(snapshot1.child("name").getValue(String.class))) {
+                            MainActivity.db.getReference().child("Status").setValue(snapshot1.child("description").getValue(String.class));
+                            Item.this.name = name;
+                            Item.this.brand = brand;
+                            Item.this.description = snapshot1.child("description").getValue(String.class);
+                            Item.this.specifications = snapshot1.child("specifications").getValue(String.class);
+                            Item.this.price = snapshot1.child("price").getValue(Double.class);
+                        }
+                    }
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
     }
+
 
 
     @Override

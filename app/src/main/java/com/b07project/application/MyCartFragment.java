@@ -35,8 +35,8 @@ public class MyCartFragment extends Fragment {
     private Item[] createSampleOrders() {
         List<Item> orders = new ArrayList<>();
         //Order(String shopper, String brand, String i_name, String status, int orderNumber, int itemNumber)
-        orders.add (new Item("Turtles", "Smoll", 14.99f, "Mike", "they just turtles man!"));
-        orders.add (new Item("Turtles2", "Smoll", 19.99f, "Chen", "they just better sturtles man!"));
+        //rders.add (new Item("Turtles", "Smoll", 14.99f, "Mike", "they just turtles man!"));
+        //orders.add (new Item("Turtles2", "Smoll", 19.99f, "Chen", "they just better sturtles man!"));
         Item[] arr = new Item[orders.size()];
         return orders.toArray(arr);
     }

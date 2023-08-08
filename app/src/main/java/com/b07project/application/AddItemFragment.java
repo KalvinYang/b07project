@@ -88,10 +88,12 @@ public class AddItemFragment extends Fragment {
                 String name = itemName.getText().toString().trim();
                 String description = itemDescription.getText().toString().trim();
                 String specification = itemSpecifications.getText().toString().trim();
-                float price = Float.parseFloat(itemPrice.getText().toString().trim());
+                Double price = Double.valueOf(itemPrice.getText().toString().trim());
 
                 Item item = new Item(name, description, price, mParam1, specification);
                 item.saveItem();
+
+                //go back to previous page
 
             }
         });

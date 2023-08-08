@@ -111,7 +111,7 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
 
     private void dataInitialize(){
         items = new ArrayList<>();
-        items.add("item 1");
+        items.add("Shoes");
         items.add("item 2");
         items.add("item 3");
         items.add("item 4");
