@@ -92,7 +92,6 @@ public class AddItemFragment extends Fragment {
 
                 Item newItem = new Item(name, description, price, mParam1, specification);
                 newItem.saveItem();
-
             }
         });
 

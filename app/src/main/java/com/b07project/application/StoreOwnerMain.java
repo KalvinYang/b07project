@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,7 @@ public class StoreOwnerMain extends AppCompatActivity {
 
         OrdersFragmentBtn = findViewById(R.id.OwnerOrders);
         StoreOwnerViewMyShopBtn = findViewById(R.id.ViewMyShopButton);
-        storeOwner = findViewById(R.id.StoreOwnerMainTitle);
+        storeOwner = findViewById(R.id.StoreOwnerMain);
 
         String gandum = getIntent().getStringExtra("ninjago");
 
@@ -33,7 +32,7 @@ public class StoreOwnerMain extends AppCompatActivity {
         OrdersFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replacetoMyOrderFragment(new OrdersFragment());
+                replacetoMyOrderFragment(new OrdersFragment(), gandum);
             }
         });
 
@@ -53,9 +52,10 @@ public class StoreOwnerMain extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void replacetoMyOrderFragment(Fragment fragment){
+    private void replacetoMyOrderFragment(Fragment fragment, String brand){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = OrdersFragment.newInstance(brand);
         fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);
         fragmentTransaction.commit();
     }

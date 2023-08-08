@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                                     brand = sn.getKey();
                                 }
                             }
-                            Navigate(isShopOwner, brand);
+                            Navigate(isShopOwner, brand, email);
                         }
 
                         @Override
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    void Navigate(boolean isShopOwner, String brand){
+    void Navigate(boolean isShopOwner, String brand, String email){
         Intent intent;
         if (isShopOwner){
             intent = new Intent(LoginActivity.this, StoreOwnerMain.class);
@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             intent = new Intent(LoginActivity.this, ShopperMain.class);
+            intent.putExtra("UserEmail", email);
         }
         startActivity(intent);
         finish();
