@@ -22,7 +22,7 @@ public class Item extends ObjectsToSave{
 
     DatabaseReference ref = MainActivity.db.getReference("Store");
 
-    Item(String name, String description, float price, String brand, String specifications, int itemNumber) {
+    Item(String name, String description, float price, String brand, String specifications) {
         super(Item.class);
         this.name = name;
         this.description = description;

@@ -84,11 +84,14 @@ public class AddItemFragment extends Fragment {
         additembutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Adds an item to the store
+                // TODO Adds an item to the store also mParam1 is the brand
                 String name = itemName.getText().toString().trim();
                 String description = itemDescription.getText().toString().trim();
                 String specification = itemSpecifications.getText().toString().trim();
-                double price = Double.valueOf(itemPrice.getText().toString().trim());
+                float price = Float.valueOf(itemPrice.getText().toString().trim());
+
+                Item newItem = new Item(name, description, price, mParam1, specification);
+                newItem.saveItem();
 
             }
         });
