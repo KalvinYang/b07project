@@ -8,11 +8,21 @@ abstract class ObjectsToSave {
 
     DatabaseReference ref;
 
+
+
     ObjectsToSave(Class cName) {ref = MainActivity.db.getReference(cName.getSimpleName());}
+
+    ObjectsToSave() {
+    }
 
     abstract Map<String, Object> createHashMap();
 
     public String updateObject(Map<String, Object> map) {
+        String ref2 = ref.push().getKey();
+        ref.child(ref2).updateChildren(map);
+        return ref2;
+    }
+    public String saveObject(Map<String, Object> map) {
         String ref2 = ref.push().getKey();
         ref.child(ref2).setValue(map);
         return ref2;

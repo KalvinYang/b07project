@@ -37,7 +37,7 @@ class Order extends ObjectsToSave{
         else if (a instanceof StoreOwner) {
             status = "Complete";
         }
-        return updateObject(createHashMap());
+        return saveObject(createHashMap());
     }
 
     String cancelOrder() {
