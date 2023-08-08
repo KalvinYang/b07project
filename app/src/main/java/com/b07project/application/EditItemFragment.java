@@ -98,7 +98,7 @@ public class EditItemFragment extends Fragment {
                             i.brand = mParam2;
                             i.description = snapshot1.child("description").getValue(String.class);
                             i.specifications = snapshot1.child("specifications").getValue(String.class);
-                            i.price = snapshot1.child("price").getValue(Double.class);
+                            i.price = Float.parseFloat(snapshot1.child("price").getValue(String.class));
                             editItemName.setText(i.name);
                             editDescription.setText(i.description);
                             editSpecification.setText(i.specifications);
@@ -128,6 +128,19 @@ public class EditItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //TODO Something to edit the store's items mparam1 = itemName, mparam2 = brand
+                if ( !(i.name.equals(editItemName.getText().toString().trim()))){
+                    i.name = editItemName.getText().toString().trim();
+                }
+                if (!(i.specifications.equals(editSpecification.getText().toString().trim()))){
+                    i.specifications = editSpecification.getText().toString().trim();
+                }
+                if(!(i.description.equals(editDescription.getText().toString().trim()))){
+                    i.description = editDescription.getText().toString().trim();
+                }
+                if(!(i.price == Float.parseFloat((editPrice.getText().toString().trim())))){
+                    i.price = Float.parseFloat((editPrice.getText().toString().trim()));
+                }
+                i.updateItem();
 
 
 

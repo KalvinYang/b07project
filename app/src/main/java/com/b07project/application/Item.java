@@ -14,7 +14,7 @@ import java.util.Map;
 public class Item extends ObjectsToSave{
     String name;
     String description;
-    Double price;
+    Float price;
     String brand;
     String specifications;
     private String key;
@@ -27,7 +27,7 @@ public class Item extends ObjectsToSave{
 
     }
 
-    Item(String name, String description, Double price, String brand, String specifications) {
+    Item(String name, String description, Float price, String brand, String specifications) {
         super(Item.class);
         this.name = name;
         this.description = description;
@@ -46,7 +46,7 @@ public class Item extends ObjectsToSave{
         this.description = description;
     }
 
-    void Modify_price(Double price){
+    void Modify_price(Float price){
         this.price = price;
     }
 
@@ -84,7 +84,7 @@ public class Item extends ObjectsToSave{
                             Item.this.brand = brand;
                             Item.this.description = snapshot1.child("description").getValue(String.class);
                             Item.this.specifications = snapshot1.child("specifications").getValue(String.class);
-                            Item.this.price = snapshot1.child("price").getValue(Double.class);
+                            Item.this.price = Float.parseFloat(snapshot1.child("price").getValue(String.class));
                         }
                     }
                 }
