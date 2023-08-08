@@ -21,8 +21,6 @@ public class Item extends ObjectsToSave{
 
     //image field may be introduced
 
-    DatabaseReference ref = MainActivity.db.getReference("Store");
-
     Item(String name, String description, float price, String brand, String specifications) {
         super(Item.class);
         this.name = name;
@@ -61,17 +59,20 @@ public class Item extends ObjectsToSave{
         saveObject(createHashMap());
     }
 
-    public void deleteobject(){
-        this.findItem();
-        ref.child(key).removeValue();
-    }
-
-    public void findItem() {
-        Query query = ref.equalTo("brand",this.brand).equalTo("name",this.name);
+    public static void deleteobject(String name, String brand){
+        DatabaseReference ref = MainActivity.db.getReference("Item");
+        Query query = ref.orderByChild("name").equalTo(name);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                key = snapshot.getKey();
+                //ref.child("testing1").setValue(snapshot.toString());
+
+                for(DataSnapshot sn : snapshot.getChildren()) {
+                    if (sn.child("brand").getValue().equals(brand)) {
+                        String key = sn.getKey();
+                        ref.child(key).removeValue();
+                    }
+                }
             }
 
             @Override

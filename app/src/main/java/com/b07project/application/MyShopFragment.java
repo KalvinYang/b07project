@@ -118,7 +118,6 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ref.child("testing2").setValue(snapshot.getValue());
                 for(DataSnapshot sn : snapshot.getChildren()){
                     String name = sn.child("name").getValue(String.class);
                     items.add(name);
