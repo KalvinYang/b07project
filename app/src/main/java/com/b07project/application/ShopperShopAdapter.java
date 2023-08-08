@@ -1,5 +1,7 @@
 package com.b07project.application;
 
+import static com.b07project.application.ShopperMain.UserEmail;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,13 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
 
     Context context;
     ArrayList<String> items;
-    //String brand;
+    String brand;
     private ViewShopItemClickListener viewShopItemClickListener;
 
-    public ShopperShopAdapter(Context context, ArrayList<String> items, /*String brand,*/ ViewShopItemClickListener viewShopItemClickListener){
+    public ShopperShopAdapter(Context context, ArrayList<String> items, String brand, ViewShopItemClickListener viewShopItemClickListener){
         this.context = context;
         this.items = items;
-        //this.brand = brand;
+        this.brand = brand;
         this.viewShopItemClickListener = viewShopItemClickListener;
     }
 
@@ -41,9 +43,16 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
         holder.viewItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewShopItemClickListener.ViewShopItemClick(item);
+                viewShopItemClickListener.ViewShopItemClick(item, brand);
             }
         });
+        /*holder.AddToCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO create an order and then add to to cart
+                Order adding = new Order(UserEmail, brand, item, 19);
+            }
+        });*/
     }
 
     @Override
@@ -64,7 +73,7 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
     }
 
     public interface ViewShopItemClickListener{
-        public void ViewShopItemClick(String ViewStoreItemName);
+        public void ViewShopItemClick(String ViewStoreItemName, String brand);
     }
 
 }

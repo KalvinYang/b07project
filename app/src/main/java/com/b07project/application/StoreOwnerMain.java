@@ -15,6 +15,8 @@ public class StoreOwnerMain extends AppCompatActivity {
     Button OrdersFragmentBtn, StoreOwnerViewMyShopBtn;
     TextView storeOwner;
 
+    public static String brandon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class StoreOwnerMain extends AppCompatActivity {
         OrdersFragmentBtn = findViewById(R.id.OwnerOrders);
         StoreOwnerViewMyShopBtn = findViewById(R.id.ViewMyShopButton);
         storeOwner = findViewById(R.id.StoreOwnerMain);
-
+        brandon = getIntent().getStringExtra("ninjago");
         String gandum = getIntent().getStringExtra("ninjago");
 
         storeOwner.setText(gandum);

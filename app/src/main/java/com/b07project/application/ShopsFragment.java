@@ -54,7 +54,6 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ShopsFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -111,12 +110,6 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
-
-
-
-
     }
 
     private void dataInitialize(){

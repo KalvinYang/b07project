@@ -5,11 +5,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -22,9 +24,11 @@ public class ShopperShpItemFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
+    private String mParam2;
 
     public ShopperShpItemFragment() {
         // Required empty public constructor
@@ -38,10 +42,11 @@ public class ShopperShpItemFragment extends Fragment {
      * @return A new instance of fragment ShopperShpItemFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShopperShpItemFragment newInstance(String param1) {
+    public static ShopperShpItemFragment newInstance(String param1, String param2) {
         ShopperShpItemFragment fragment = new ShopperShpItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,6 +56,7 @@ public class ShopperShpItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -66,7 +72,23 @@ public class ShopperShpItemFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView ShopViewItemName = view.findViewById(R.id.shopItemNameText);
         TextView ShopViewItemBrand = view.findViewById(R.id.shopItemBrandText);
+        TextView ShopViewItemDescription = view.findViewById(R.id.shopItemDecriptionText);
+        TextView ShopViewItemSpecification = view.findViewById(R.id.shopItemSpecification);
+        Button addToCartButton = view.findViewById(R.id.ItemAddItemToCartButton);
+        Button backButton = view.findViewById(R.id.BackToShopViewButton);
+
         ShopViewItemName.setText(mParam1);
+        ShopViewItemBrand.setText(mParam2);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                ShopperShopFragment fragment = ShopperShopFragment.newInstance(mParam2);
+                fr.replace(R.id.ShopperFrameLayout, fragment);
+                fr.commit();
+            }
+        });
     }
 
 }

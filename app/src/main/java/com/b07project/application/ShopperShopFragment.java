@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -83,12 +84,13 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
         items = new ArrayList<>();
 
         TextView ShopViewShopName = view.findViewById(R.id.BrandName);
+        Button backtoShopsBtn = view.findViewById(R.id.ShopperShopBackButton);
         ShopViewShopName.setText(mParam1);
 
         itemsRecycler = view.findViewById(R.id.StorePageRecyclerView);
         itemsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         itemsRecycler.setHasFixedSize(true);
-        ShopperShopAdapter shopperShopAdapter = new ShopperShopAdapter(getContext(), items,this::ViewShopItemClick);
+        ShopperShopAdapter shopperShopAdapter = new ShopperShopAdapter(getContext(), items, mParam1, this::ViewShopItemClick);
         itemsRecycler.setAdapter(shopperShopAdapter);
 
 
@@ -113,6 +115,16 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
             }
         });
 
+        backtoShopsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                ShopsFragment fragment = ShopsFragment.newInstance("");
+                fr.replace(R.id.ShopperFrameLayout, fragment);
+                fr.commit();
+            }
+        });
+
 
     }
 
@@ -130,8 +142,8 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
     }
 
     @Override
-    public void ViewShopItemClick(String ViewStoreItemName) {
-        Fragment fragment = ShopperShpItemFragment.newInstance(ViewStoreItemName);
+    public void ViewShopItemClick(String ViewStoreItemName, String brand) {
+        Fragment fragment = ShopperShpItemFragment.newInstance(ViewStoreItemName, brand);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.ShopperFrameLayout, fragment, "ShopperViewShopItemView");
         transaction.addToBackStack(null);
