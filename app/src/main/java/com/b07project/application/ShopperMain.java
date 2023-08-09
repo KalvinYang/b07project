@@ -17,7 +17,10 @@ public class ShopperMain extends AppCompatActivity {
     TextView shopperMainTitle;
     private Cart passer;
     private MyOrdersAdapter adapter;
-    public static String UserEmail; //= getIntent().getStringExtra("UserEmail");;
+    public static String UserEmail;
+
+    public static Cart cart;
+    //= getIntent().getStringExtra("UserEmail");;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class ShopperMain extends AppCompatActivity {
         shopperMainTitle = findViewById(R.id.ShopperMainTitle);
         UserEmail = getIntent().getStringExtra("UserEmail");
         shopperMainTitle.setText(UserEmail);
-
+        cart = new Cart(UserEmail);
         MyCartFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

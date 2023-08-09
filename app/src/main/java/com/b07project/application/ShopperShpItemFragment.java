@@ -1,5 +1,8 @@
 package com.b07project.application;
 
+import static com.b07project.application.ShopperMain.UserEmail;
+import static com.b07project.application.ShopperMain.cart;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,6 +39,7 @@ public class ShopperShpItemFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    float price;
     DatabaseReference ref = MainActivity.db.getReference("Item");
 
     public ShopperShpItemFragment() {
@@ -81,11 +85,10 @@ public class ShopperShpItemFragment extends Fragment {
         TextView ShopViewItemName = view.findViewById(R.id.shopItemNameText);
         TextView ShopViewItemBrand = view.findViewById(R.id.shopItemBrandText);
         TextView ShopViewItemDescription = view.findViewById(R.id.shopItemDecriptionText);
-        TextView ShopViewItemSpecification = view.findViewById(R.id.shopItemSpecification);
+        TextView ShopViewItemSpecification = view.findViewById(R.id.shopItemSpecificationText);
         TextView ShopViewItemPrice = view.findViewById(R.id.shopItemPriceText);
         Button addToCartButton = view.findViewById(R.id.ItemAddItemToCartButton);
         Button backButton = view.findViewById(R.id.BackToShopViewButton);
-
         //mparam1 = name , mparam2 = brand
 
 
@@ -98,13 +101,12 @@ public class ShopperShpItemFragment extends Fragment {
                     for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
 
                         if (mParam2.equals(snapshot1.child("brand").getValue(String.class))) {
+                            price = snapshot1.child("price").getValue(float.class);
                             ShopViewItemName.setText(mParam1);
                             ShopViewItemBrand.setText(mParam2);
                             ShopViewItemDescription.setText(snapshot1.child("description").getValue(String.class));
                             ShopViewItemSpecification.setText(snapshot1.child("specifications").getValue(String.class));
                             ShopViewItemPrice.setText(Float.toString(snapshot1.child("price").getValue(float.class)));
-
-
 
                         }
                     }
@@ -124,6 +126,14 @@ public class ShopperShpItemFragment extends Fragment {
                 ShopperShopFragment fragment = ShopperShopFragment.newInstance(mParam2);
                 fr.replace(R.id.ShopperFrameLayout, fragment);
                 fr.commit();
+            }
+        });
+
+        addToCartButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Order addToCart = new Order(UserEmail, mParam2, mParam1, price);
+                cart.addOrder(addToCart);
             }
         });
     }

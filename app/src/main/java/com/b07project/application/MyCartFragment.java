@@ -1,5 +1,7 @@
 package com.b07project.application;
 
+import static com.b07project.application.ShopperMain.cart;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,7 +24,7 @@ import java.util.List;
 public class MyCartFragment extends Fragment {
 
     private RecyclerView ordersRecyclerView;
-    public static Cart cart;
+    //public static Cart cart;
     private String userEmail;
     View rootView;
     TextView total;
@@ -36,12 +38,12 @@ public class MyCartFragment extends Fragment {
         myCartTitle = rootView.findViewById(R.id.myCartTitle);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if (currentUser != null)
-            userEmail = currentUser.getEmail();
-        cart = new Cart (userEmail);
+        /*if (currentUser != null)
+            userEmail = currentUser.getEmail();*/
+        //cart = new Cart (userEmail);
         //createSampleOrders();
         // TODO: Load recent cart from db set it to this.cart (Backend people)
-        myCartTitle.setText(userEmail);
+        //myCartTitle.setText(userEmail);
         ordersRecyclerView = rootView.findViewById(R.id.funnyCart);
         ordersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         CartAdapter adapter = new CartAdapter(cart, this);
