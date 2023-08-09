@@ -70,7 +70,7 @@ public class MyCartFragment extends Fragment {
         cart.changeStatus(new Shopper(cart.shopper));
     }
     public void clearCart() {
-        cart = new Cart (userEmail);
+        cart = new Cart (UserEmail);
         //TODO: Do saving here of the new cart if needed! Not sure where exactly does a new cart get created for saving (Backend People)
         CartAdapter adapter = new CartAdapter(cart, this);
         ordersRecyclerView.setAdapter(adapter);

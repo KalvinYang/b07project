@@ -36,14 +36,16 @@ public class MyOrdersFragment extends Fragment {
         ordersRecyclerView = rootView.findViewById(R.id.ordersRecyclerView);
         ordersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //Uncomment below when the above 'to do' is completed
-        //initList();
+        //createSampleOrders();;
+        initList();
         return rootView;
     }
     //for testing
     private void createSampleOrders() {
         List<Cart> orders = new ArrayList<>();
-        orders.add (new Cart ("test" ));
-        orders.add (new Cart ("test2"));
+        /*orders.add (new Cart ("test" ));
+        orders.add (new Cart ("test2"));*/
+        //TODO fetch the list of carts and add it to orders NOTE: Email is UserEmail
         list = new Cart[orders.size()];
         list = orders.toArray(list);
     }

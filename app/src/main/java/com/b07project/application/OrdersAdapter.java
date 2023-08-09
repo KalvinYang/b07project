@@ -22,7 +22,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
         public ViewHolder(View view) {
             super(view);
-
             orderID = (TextView) view.findViewById(R.id.orderKey);
             status = (TextView) view.findViewById(R.id.status);
             completeButton = (Button) view.findViewById(R.id.completedButton);
@@ -54,7 +53,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.itemorderstoreownerlayout, viewGroup, false);
-
         return new ViewHolder(view);
     }
 

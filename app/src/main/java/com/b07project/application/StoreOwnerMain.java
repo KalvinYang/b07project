@@ -34,7 +34,7 @@ public class StoreOwnerMain extends AppCompatActivity {
         OrdersFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replacetoMyOrderFragment(new OrdersFragment(), gandum);
+                replacetoMyOrderFragment(new OrdersFragment()/*, gandum*/);
             }
         });
 
@@ -54,10 +54,10 @@ public class StoreOwnerMain extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void replacetoMyOrderFragment(Fragment fragment, String brand){
+    private void replacetoMyOrderFragment(Fragment fragment/*, String brand*/){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragment = OrdersFragment.newInstance(brand);
+        //fragment = OrdersFragment.newInstance();
         fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);
         fragmentTransaction.commit();
     }
