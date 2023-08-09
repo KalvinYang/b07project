@@ -9,6 +9,10 @@ abstract class User {
     String username;
     private String password;
 
+    User(){
+
+    }
+
     User(String username, String password) {
         this.username = username;
         this.password = password;

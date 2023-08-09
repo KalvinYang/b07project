@@ -1,5 +1,6 @@
 package com.b07project.application;
 
+import static com.b07project.application.ShopperMain.UserEmail;
 import static com.b07project.application.ShopperMain.cart;
 
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class MyCartFragment extends Fragment {
     public void sendCart(){
         Cart temp = cart;
         //TODO: All DB saving of cart status occurs here (Backend people)
+        cart.changeStatus(new Shopper(cart.shopper));
     }
     public void clearCart() {
         cart = new Cart (userEmail);

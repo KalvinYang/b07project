@@ -40,13 +40,12 @@ class Order extends ObjectsToSave{
         return saveObject(createHashMap());
     }
 
-    /*
+
     String cancelOrder() {
         status = "Canceled";
-        return updateObject(key, createHashMap());
+        //return updateObject(key, createHashMap());
+        return "go fuck yourself";
     }
-    */
-
 
     @Override
     HashMap<String, Object> createHashMap() {
