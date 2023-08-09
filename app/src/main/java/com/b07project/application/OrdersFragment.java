@@ -21,7 +21,7 @@ public class OrdersFragment extends Fragment {
 
     private RecyclerView ordersRecyclerView;
     String brand;
-    Order[] orders;
+    ArrayList<Order> orders;
 
     public static OrdersFragment newInstance(String brand){
         OrdersFragment fragment = new OrdersFragment();
@@ -34,7 +34,7 @@ public class OrdersFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_orders, container, false);
         this.brand = brandon;//((StoreOwnerMain) getActivity()).getBrand();
-        orders = createSampleOrders();
+        orders = new ArrayList<Order>();
         //TODO: Perform a database fetch using the brand as a query parameter once success callback is called please create an array with each order object
         //TODO: initialize the 'orders' array with the information from database after array creation please call initList();
         ordersRecyclerView = rootView.findViewById(R.id.ordersRecyclerView);

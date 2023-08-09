@@ -46,13 +46,6 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
                 viewShopItemClickListener.ViewShopItemClick(item, brand);
             }
         });
-        /*holder.AddToCartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO create an order and then add to to cart
-                Order adding = new Order(UserEmail, brand, item, 19);
-            }
-        });*/
     }
 
     @Override
@@ -62,13 +55,12 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
 
     public static class ShopperShopHolder extends RecyclerView.ViewHolder{
         TextView itemName;
-        Button viewItemBtn, AddToCartBtn;
+        Button viewItemBtn;
 
         public ShopperShopHolder(@NonNull View itemView){
             super(itemView);
             itemName = itemView.findViewById(R.id.ItemName);
             viewItemBtn = itemView.findViewById(R.id.ViewItemButton);
-            AddToCartBtn = itemView.findViewById(R.id.AddToCartButton);
         }
     }
 

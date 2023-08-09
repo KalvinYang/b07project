@@ -47,7 +47,7 @@ public class ShopperSignUpActivity extends AppCompatActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(password)){
-                    Toast.makeText(ShopperSignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShopperSignUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

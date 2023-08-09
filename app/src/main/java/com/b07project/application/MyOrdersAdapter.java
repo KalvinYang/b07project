@@ -58,7 +58,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Cart cart = localDataSet.get(position);
-        viewHolder.getOrderNum().setText(cart.orderID.toString()/*localDataSet[position].orderID.toString()*/);
+        viewHolder.getOrderNum().setText("Order " + (position + 1) + ":"/*localDataSet[position].orderID.toString()*/);
         viewHolder.getStatus().setText(cart.status/*localDataSet[position].status*/);
 
         viewHolder.getRoot().setOnClickListener(v -> {
@@ -70,8 +70,6 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
                     .replace(R.id.frameLayout, orderDetailsFragment)
                     .addToBackStack(null)
                     .commit();
-
-
         });
 
 

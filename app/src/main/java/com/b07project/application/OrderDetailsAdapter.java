@@ -69,7 +69,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         Order currentOrder = localDataSet.get(position);
         viewHolder.getBrand().setText(currentOrder.brand);
         viewHolder.getName().setText(currentOrder.i_name);
-        viewHolder.getPrice().setText("$" + String.valueOf(cartInstance.totalPrice()));
+        viewHolder.getPrice().setText("$" + String.valueOf(currentOrder.price));
     }
 
     @Override
