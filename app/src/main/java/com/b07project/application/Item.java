@@ -21,6 +21,12 @@ public class Item extends ObjectsToSave{
 
     //image field may be introduced
 
+    DatabaseReference ref = MainActivity.db.getReference("Item");
+
+    Item(){
+        super(Item.class);
+    }
+
     Item(String name, String description, float price, String brand, String specifications) {
         super(Item.class);
         this.name = name;
@@ -52,8 +58,8 @@ public class Item extends ObjectsToSave{
         this.specifications = specifications;
     }
 
-    void updateItem(){
-        updateObject(createHashMap());
+    void updateItem(String key){
+        updateObject(key, createHashMap());
     }
     void saveItem() {
         saveObject(createHashMap());
