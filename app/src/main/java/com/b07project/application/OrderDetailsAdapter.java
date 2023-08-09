@@ -19,7 +19,8 @@ import java.util.List;
 
 public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder> {
 
-    private Order[] localDataSet;
+    //private Order[] localDataSet;
+    ArrayList<Order> localDataSet;
     private Cart cartInstance;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -50,8 +51,8 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
     }
 
     public OrderDetailsAdapter(Cart cart) {
-        this.localDataSet = new Order[cart.orders.size()];
-        this.localDataSet = cart.orders.toArray(this.localDataSet);
+        //this.localDataSet = new Order[cart.orders.size()];
+        this.localDataSet = new ArrayList<Order>(cart.orders);
         this.cartInstance = cart;
     }
 
@@ -65,15 +66,15 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
-        viewHolder.getBrand().setText(localDataSet[position].brand);
-        viewHolder.getName().setText(localDataSet[position].i_name);
+        Order currentOrder = localDataSet.get(position);
+        viewHolder.getBrand().setText(currentOrder.brand);
+        viewHolder.getName().setText(currentOrder.i_name);
         viewHolder.getPrice().setText("$" + String.valueOf(cartInstance.totalPrice()));
     }
 
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localDataSet.size();
     }
 }
 

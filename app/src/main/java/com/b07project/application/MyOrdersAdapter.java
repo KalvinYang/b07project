@@ -10,9 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHolder> {
 
-    private Cart[] localDataSet;
+    //private Cart[] localDataSet;
+    ArrayList<Cart> localDataSet;
     private ShopperMain s;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -39,7 +42,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
         }
     }
 
-    public MyOrdersAdapter(Cart[] dataSet, ShopperMain s) {
+    public MyOrdersAdapter(ArrayList<Cart> dataSet/*Cart[] dataSet*/, ShopperMain s) {
         localDataSet = dataSet;
         this.s = s;
     }
@@ -54,11 +57,11 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
-        viewHolder.getOrderNum().setText(localDataSet[position].orderID.toString());
-        viewHolder.getStatus().setText(localDataSet[position].status);
+        Cart cart = localDataSet.get(position);
+        viewHolder.getOrderNum().setText(cart.orderID.toString()/*localDataSet[position].orderID.toString()*/);
+        viewHolder.getStatus().setText(cart.status/*localDataSet[position].status*/);
         viewHolder.getRoot().setOnClickListener(v -> {
-            s.setPasser(localDataSet[position]);
+            s.setPasser(cart);
             s.setOrderAdapter(this);
             FragmentManager fragmentManager = s.getSupportFragmentManager();
             Fragment orderDetailsFragment = new orderDetailsFragment();
@@ -71,7 +74,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localDataSet.size();
     }
 
 }

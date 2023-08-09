@@ -39,6 +39,7 @@ public class OrdersFragment extends Fragment {
         //TODO: initialize the 'orders' array with the information from database after array creation please call initList();
         ordersRecyclerView = rootView.findViewById(R.id.ordersRecyclerView);
         ordersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        initList();
         return rootView;
     }
     //for testing
