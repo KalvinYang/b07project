@@ -60,6 +60,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
         Cart cart = localDataSet.get(position);
         viewHolder.getOrderNum().setText(cart.orderID.toString()/*localDataSet[position].orderID.toString()*/);
         viewHolder.getStatus().setText(cart.status/*localDataSet[position].status*/);
+
         viewHolder.getRoot().setOnClickListener(v -> {
             s.setPasser(cart);
             s.setOrderAdapter(this);
@@ -69,7 +70,11 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
                     .replace(R.id.frameLayout, orderDetailsFragment)
                     .addToBackStack(null)
                     .commit();
+
+
         });
+
+
     }
 
     @Override

@@ -68,6 +68,7 @@ public class orderDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_orderdetails, container, false);
+
         c = ((ShopperMain) getActivity()).getPasser();
         Button cancelButton = view.findViewById(R.id.cancelButton);
         TextView status = view.findViewById(R.id.statusTxt);
@@ -75,16 +76,16 @@ public class orderDetailsFragment extends Fragment {
         TextView price = view.findViewById(R.id.totalTxt);
         String formattedString = String.format("%.2f", c.totalPrice());
         price.setText("$" + formattedString);
-        back.setOnClickListener(v ->{
+        back.setOnClickListener(v -> {
             getActivity().onBackPressed();
         });
         recycle = view.findViewById(R.id.funnyCart);
         recycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         OrderDetailsAdapter adapter = new OrderDetailsAdapter(c);
         recycle.setAdapter(adapter);
+
         status.setText(c.status);
-        if (!c.status.equals("Canceled"))
-        {
+        if (!c.status.equals("Canceled")) {
             cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -94,8 +95,12 @@ public class orderDetailsFragment extends Fragment {
                     ((ShopperMain) getActivity()).refreshOrderAdapter();
                 }
             });
-        }
-        else cancelButton.setVisibility(View.GONE);
+        } else cancelButton.setVisibility(View.GONE);
+        //return view;
+
+
         return view;
     }
+
+
 }
