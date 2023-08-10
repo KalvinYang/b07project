@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShopperMain extends AppCompatActivity {
 
@@ -98,6 +99,7 @@ public class ShopperMain extends AppCompatActivity {
         Intent intent = new Intent(ShopperMain.this, ShopperMain.class);
         UserEmail = getIntent().getStringExtra("UserEmail");
         intent.putExtra("UserEmail", UserEmail);
+        Toast.makeText(ShopperMain.this, "There is no escape!",Toast.LENGTH_SHORT).show();
         startActivity(intent);
         finish();
     }

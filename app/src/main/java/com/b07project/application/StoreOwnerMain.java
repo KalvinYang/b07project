@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StoreOwnerMain extends AppCompatActivity {
 
@@ -72,8 +73,10 @@ public class StoreOwnerMain extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(StoreOwnerMain.this, StoreOwnerMain.class);
         StoreEmail = getIntent().getStringExtra("UserEmail");
+        brandon = getIntent().getStringExtra("ninjago");
         intent.putExtra("UserEmail", StoreEmail);
         intent.putExtra("ninjago", brandon);
+        Toast.makeText(StoreOwnerMain.this, "There is no escape!",Toast.LENGTH_SHORT).show();
         startActivity(intent);
         finish();
     }
