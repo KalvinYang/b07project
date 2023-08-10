@@ -18,11 +18,15 @@ public class Item extends ObjectsToSave{
     String brand;
     String specifications;
 
-    //image field may be introduced
 
-    DatabaseReference ref = MainActivity.db.getReference("Store");
 
-    Item(String name, String description, float price, String brand, String specifications, int itemNumber) {
+    DatabaseReference ref = MainActivity.db.getReference("Item");
+
+    Item(){
+        super(Item.class);
+    }
+
+    Item(String name, String description, float price, String brand, String specifications) {
         super(Item.class);
         this.name = name;
         this.description = description;
@@ -31,52 +35,33 @@ public class Item extends ObjectsToSave{
         this.specifications = specifications;
     }
 
-    //Following methods need to reflect changes in firebase
-
-    void Modify_name(String name){
-        this.name = name;
+    void updateItem(String key){
+        updateObject(key, createHashMap());
     }
-
-    void Modify_description(String description){
-        this.description = description;
-    }
-
-    void Modify_price(float price){
-        this.price = price;
-    }
-
-    void Modify_brand(String brand){
-        this.brand = brand;
-    }
-
-    void Modify_specifications(String specifications){
-        this.specifications = specifications;
-    }
-
-
     void saveItem() {
-        updateObject(createHashMap());
+        saveObject(createHashMap());
     }
 
-    public void deleteobject(){
-        String key = this.findItem();
-        ref.child(key).removeValue();
-    }
-
-    public String findItem() {
-        Query query = ref.equalTo("brand",this.brand).equalTo("name",this.name);
-        final String[] key = new String[1];
+    public static void deleteobject(String name, String brand){
+        DatabaseReference ref = MainActivity.db.getReference("Item");
+        Query query = ref.orderByChild("name").equalTo(name);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                key[0] = snapshot.getKey();
+
+
+                for(DataSnapshot sn : snapshot.getChildren()) {
+                    if (sn.child("brand").getValue().equals(brand)) {
+                        String key = sn.getKey();
+                        ref.child(key).removeValue();
+                    }
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        return key[0];
     }
 
 

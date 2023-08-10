@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditItemFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/EditItemTitle"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:backgroundTint="#000000"
+            android:fontFamily="serif"
+            android:text="Edit:"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/EditItemName"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:hint="Name:"
+            android:inputType="text"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/EditItemDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditItemTitle" />
+
+        <EditText
+            android:id="@+id/EditItemPrice"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:hint="Price:"
+            android:inputType="numberDecimal"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/EditItemBackButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditItemSpecification" />
+
+        <EditText
+            android:id="@+id/EditItemDescription"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="#000000"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:gravity="start|top"
+            android:hint="Description:"
+            android:inputType="textMultiLine"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/EditItemSpecification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditItemName" />
+
+        <EditText
+            android:id="@+id/EditItemSpecification"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="#000000"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:gravity="start|top"
+            android:hint="Specifications:"
+            android:inputType="textMultiLine"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/EditItemPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditItemDescription" />
+
+        <Button
+            android:id="@+id/EditItemToStoreButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:fontFamily="serif"
+            android:text="Edit Item"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/EditItemBackButton" />
+
+        <Button
+            android:id="@+id/EditItemBackButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:fontFamily="serif"
+            android:text="Back"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/EditItemToStoreButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

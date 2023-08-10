@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
     tools:context=".LoginActivity">
 
     <Button
@@ -13,6 +14,7 @@
         android:backgroundTint="#000000"
         android:fontFamily="serif"
         android:text="Login"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
@@ -27,6 +29,7 @@
         android:layout_marginTop="160dp"
         android:fontFamily="serif"
         android:text="Login"
+        android:textColor="#000000"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.163"
@@ -43,6 +46,7 @@
         android:fontFamily="serif"
         android:hint="Email"
         android:inputType="text|textLongMessage"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +62,25 @@
         android:fontFamily="serif"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#000000"
+        android:fontFamily="serif"
+        android:onClick="LoginToFrontpage"
+        android:text="Back"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginbutton"
+        app:layout_constraintVertical_bias="0.255" />
 </androidx.constraintlayout.widget.ConstraintLayout>

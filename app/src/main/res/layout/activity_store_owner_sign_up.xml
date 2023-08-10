@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
     tools:context=".StoreOwnerSignUpActivity">
 
     <Button
@@ -15,6 +16,7 @@
         android:fontFamily="serif"
         android:onClick="fromStoreOwnerSignUpToStoreOwnerMain"
         android:text="Sign Up"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
@@ -29,11 +31,27 @@
         android:layout_marginTop="156dp"
         android:fontFamily="serif"
         android:text="Store Owner Sign Up"
+        android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.605"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/BrandInput"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Brand"
+        android:inputType="text|textLongMessage"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/EmailInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StoreSignUpTitle" />
 
     <EditText
         android:id="@+id/EmailInput"
@@ -44,12 +62,13 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="text|textLongMessage"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StoreSignUpTitle"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <EditText
         android:id="@+id/InputPassword"
@@ -59,6 +78,7 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
@@ -74,6 +94,7 @@
         android:backgroundTint="#000000"
         android:onClick="fromStoreOwnerToSignUp"
         android:text="Back"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"

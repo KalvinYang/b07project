@@ -38,7 +38,6 @@ public class ShopperSignUpActivity extends AppCompatActivity {
         SignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
                 String email, password;
                 email = editTextEmail.getText().toString();
                 password = editTextPassword.getText().toString();
@@ -48,9 +47,11 @@ public class ShopperSignUpActivity extends AppCompatActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(password)){
-                    Toast.makeText(ShopperSignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShopperSignUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                progressBar.setVisibility(View.VISIBLE);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

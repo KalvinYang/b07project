@@ -4,73 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
     tools:context=".StoreOwnerMain">
 
     <FrameLayout
         android:id="@+id/StoreOwnerFrameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/OwnerOrders"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StoreOwnerMainTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreOwnerMain" />
 
     <TextView
-        android:id="@+id/StoreOwnerMainTitle"
-        android:layout_width="wrap_content"
+        android:id="@+id/StoreOwnerMain"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:text="Welcome Store Owner:"
         android:textAlignment="center"
+        android:textColor="#000000"
         android:textSize="34dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/StoreOwnerFrameLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/LogOut"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
         android:onClick="fromStoreOwnerMainToMain"
         android:text="Log Out"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ShopButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintStart_toEndOf="@+id/ViewMyShopButton" />
 
     <Button
-        android:id="@+id/ShopButton"
-        android:layout_width="100dp"
+        android:id="@+id/ViewMyShopButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
         android:text="My Shop"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/LogOut"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/OwnerOrders"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintStart_toEndOf="@+id/OwnerOrders" />
 
     <Button
         android:id="@+id/OwnerOrders"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
         android:text="Store Orders"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ShopButton"
+        app:layout_constraintEnd_toStartOf="@+id/ViewMyShopButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreOwnerFrameLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

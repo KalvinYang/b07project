@@ -10,6 +10,7 @@ class Order extends ObjectsToSave{
     // Status can one of the following: Cart (Only shopper can see) > Ordered > Complete | Canceled
     String status;
 
+    int cart_number = 2;
     // When someone makes an order (Adds something to cart)
     Order(String shopper, String brand, String i_name, float price) {
         super(Order.class);
@@ -33,17 +34,25 @@ class Order extends ObjectsToSave{
     String changeStatus(User a) {
         if (a instanceof Shopper && status.equals("Cart")) {
             status = "Ordered";
+            return saveObject(createHashMap());
         }
         else if (a instanceof StoreOwner) {
             status = "Complete";
         }
-        return updateObject(createHashMap());
+        return "";
     }
+
+
 
     String cancelOrder() {
         status = "Canceled";
-        return updateObject(createHashMap());
+
+        return "";
+        //return updateObject(key, createHashMap());
+        //return "go fuck yourself";
     }
+
+
 
     @Override
     HashMap<String, Object> createHashMap() {
@@ -53,6 +62,8 @@ class Order extends ObjectsToSave{
         map.put("i_name",this.i_name);
         map.put("status",this.status);
         map.put("price",this.price);
+        map.put("cart_number",cart_number);
         return map;
     }
+
 }
