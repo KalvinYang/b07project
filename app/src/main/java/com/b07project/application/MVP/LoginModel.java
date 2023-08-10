@@ -1,5 +1,7 @@
 package com.b07project.application.MVP;
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,7 +32,13 @@ public class LoginModel {
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String brand = "";
                             boolean isShopOwner = snapshot.getValue() != null;
+                            if (isShopOwner) {
+                                for (DataSnapshot sn : snapshot.getChildren()) {
+                                    brand = sn.getKey();
+                                }
+                            }
                             inter.navigate(isShopOwner);
                         }
 

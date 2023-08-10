@@ -1,5 +1,9 @@
 package com.b07project.application.MVP;
 
+import android.content.Intent;
+
+import com.b07project.application.StoreOwnerMain;
+
 public class LoginPresenter implements LoginModel.LoginListener{
     public LoginModel model;
     public LoginView loginView;
@@ -34,9 +38,14 @@ public class LoginPresenter implements LoginModel.LoginListener{
     }
     public void navigate(boolean owner)
     {
+        //Intent intent;
         if (loginView != null)
-            if (owner) loginView.moveToStoreOwner();
-            else loginView.moveToShopper();
+            if (owner) {
+                loginView.moveToStoreOwner();
+            }
+            else{
+                loginView.moveToShopper();
+            }
     }
 
     public void login(){
@@ -44,4 +53,5 @@ public class LoginPresenter implements LoginModel.LoginListener{
             model.login(loginView.getEmail(), loginView.getPassword(), this);
         }
     }
+
 }
