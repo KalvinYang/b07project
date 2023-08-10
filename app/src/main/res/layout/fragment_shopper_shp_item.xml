@@ -20,6 +20,8 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/shopItemPriceText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopItemSpecificationText" />
 
@@ -30,7 +32,9 @@
             android:fontFamily="serif"
             android:text="price"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/BackToShopViewButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopItemPrice" />
 
@@ -44,6 +48,8 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/shopItemSpecificationText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopItemDecriptionText" />
 
@@ -55,6 +61,8 @@
             android:text="specification"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/shopItemPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopItemSpecification" />
 
@@ -68,6 +76,8 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/shopItemDecriptionText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopItemBrandText" />
 
@@ -79,6 +89,8 @@
             android:text="description"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/shopItemSpecification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopItemDecription" />
 
@@ -92,6 +104,8 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/shopItemBrandText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopItemNameText" />
 
@@ -103,12 +117,14 @@
             android:text="brand"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/shopItemDecription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopItemBrand" />
 
         <TextView
             android:id="@+id/shopItemNameText"
-            android:layout_width="0dp"
+            android:layout_width="411dp"
             android:layout_height="wrap_content"
             android:fontFamily="serif"
             android:text="name"
@@ -133,5 +149,31 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/BackToShopViewButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:fontFamily="serif"
+            android:text="Back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ItemAddItemToCartButton" />
+
+        <Button
+            android:id="@+id/ItemAddItemToCartButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:fontFamily="serif"
+            android:text="Add To Cart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/BackToShopViewButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

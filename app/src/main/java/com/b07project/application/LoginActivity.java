@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         if (isShopOwner){
             intent = new Intent(LoginActivity.this, StoreOwnerMain.class);
             intent.putExtra("ninjago", brand);
+            intent.putExtra("UserEmail", email);
         }
         else{
             intent = new Intent(LoginActivity.this, ShopperMain.class);

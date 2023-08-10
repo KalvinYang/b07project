@@ -1,16 +1,27 @@
 package com.b07project.application;
 
+import static com.b07project.application.ShopperMain.UserEmail;
+import static com.b07project.application.ShopperMain.cart;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,9 +33,14 @@ public class ShopperShpItemFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
+    private String mParam2;
+
+    float price;
+    DatabaseReference ref = MainActivity.db.getReference("Item");
 
     public ShopperShpItemFragment() {
         // Required empty public constructor
@@ -38,10 +54,11 @@ public class ShopperShpItemFragment extends Fragment {
      * @return A new instance of fragment ShopperShpItemFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShopperShpItemFragment newInstance(String param1) {
+    public static ShopperShpItemFragment newInstance(String param1, String param2) {
         ShopperShpItemFragment fragment = new ShopperShpItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,6 +68,7 @@ public class ShopperShpItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -66,7 +84,58 @@ public class ShopperShpItemFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView ShopViewItemName = view.findViewById(R.id.shopItemNameText);
         TextView ShopViewItemBrand = view.findViewById(R.id.shopItemBrandText);
-        ShopViewItemName.setText(mParam1);
+        TextView ShopViewItemDescription = view.findViewById(R.id.shopItemDecriptionText);
+        TextView ShopViewItemSpecification = view.findViewById(R.id.shopItemSpecificationText);
+        TextView ShopViewItemPrice = view.findViewById(R.id.shopItemPriceText);
+        Button addToCartButton = view.findViewById(R.id.ItemAddItemToCartButton);
+        Button backButton = view.findViewById(R.id.BackToShopViewButton);
+        //mparam1 = name , mparam2 = brand
+
+
+        Query query = ref.orderByChild("name").equalTo(mParam1);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
+
+                        if (mParam2.equals(snapshot1.child("brand").getValue(String.class))) {
+                            price = snapshot1.child("price").getValue(float.class);
+                            ShopViewItemName.setText(mParam1);
+                            ShopViewItemBrand.setText(mParam2);
+                            ShopViewItemDescription.setText(snapshot1.child("description").getValue(String.class));
+                            ShopViewItemSpecification.setText(snapshot1.child("specifications").getValue(String.class));
+                            ShopViewItemPrice.setText(Float.toString(snapshot1.child("price").getValue(float.class)));
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                ShopperShopFragment fragment = ShopperShopFragment.newInstance(mParam2);
+                fr.replace(R.id.ShopperFrameLayout, fragment);
+                fr.commit();
+            }
+        });
+
+        addToCartButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Order addToCart = new Order(UserEmail, mParam2, mParam1, price);
+                cart.addOrder(addToCart);
+            }
+        });
     }
 
 }

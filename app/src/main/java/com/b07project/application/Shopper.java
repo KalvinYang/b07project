@@ -10,6 +10,11 @@ class Shopper extends User{
         super(username, password);
     }
 
+    Shopper(String username){
+        super();
+        this.username = username;
+    }
+
     void myCart() {
         current_cart = new Cart(this.username);
     }

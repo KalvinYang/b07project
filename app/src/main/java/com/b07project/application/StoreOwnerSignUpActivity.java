@@ -17,7 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class StoreOwnerSignUpActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword, editTextBrand;
@@ -58,29 +61,50 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                     Toast.makeText(StoreOwnerSignUpActivity.this, "Enter brand name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                progressBar.setVisibility(View.VISIBLE);
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(StoreOwnerSignUpActivity.this, "Account created.",
-                                            Toast.LENGTH_SHORT).show();
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    ref.child(brand).setValue(email);
-                                    Intent intent = new Intent(StoreOwnerSignUpActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(StoreOwnerSignUpActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    //slower than authentication so need to improve
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ownerShot : snapshot.getChildren()) {
+                                if (ownerShot.getKey().equals(brand)) {
+                                    Toast.makeText(StoreOwnerSignUpActivity.this, "Brand name already under use. Please choose another", Toast.LENGTH_SHORT).show();
+                                    return;
                                 }
+                                createAccount(brand,email,password);
                             }
-                        });
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                });
             }
         });
 
+    }
+
+    void createAccount(String brand, String email, String password){
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(StoreOwnerSignUpActivity.this, "Account created.",
+                                    Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            ref.child(brand).setValue(email);
+                            Intent intent = new Intent(StoreOwnerSignUpActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(StoreOwnerSignUpActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     public void fromStoreOwnerToSignUp(View view){

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShopperMain extends AppCompatActivity {
 
@@ -17,7 +18,10 @@ public class ShopperMain extends AppCompatActivity {
     TextView shopperMainTitle;
     private Cart passer;
     private MyOrdersAdapter adapter;
-    String UserEmail;
+    public static String UserEmail;
+
+    public static Cart cart;
+    //= getIntent().getStringExtra("UserEmail");;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class ShopperMain extends AppCompatActivity {
         shopperMainTitle = findViewById(R.id.ShopperMainTitle);
         UserEmail = getIntent().getStringExtra("UserEmail");
         shopperMainTitle.setText(UserEmail);
-
+        cart = new Cart(UserEmail);
         MyCartFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +52,7 @@ public class ShopperMain extends AppCompatActivity {
         ShopsFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new ShopsFragment());
+                replaceShopFragment(new ShopsFragment(), UserEmail);
             }
         });
 
@@ -57,6 +61,14 @@ public class ShopperMain extends AppCompatActivity {
     public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.ShopperFrameLayout,fragment);
+        fragmentTransaction.commit();
+    }
+
+    public void replaceShopFragment(Fragment fragment, String UserEmail){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = ShopsFragment.newInstance(UserEmail);
         fragmentTransaction.replace(R.id.ShopperFrameLayout,fragment);
         fragmentTransaction.commit();
     }
@@ -80,5 +92,15 @@ public class ShopperMain extends AppCompatActivity {
     public void setOrderAdapter (MyOrdersAdapter adapter)
     {
         this.adapter = adapter;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ShopperMain.this, ShopperMain.class);
+        UserEmail = getIntent().getStringExtra("UserEmail");
+        intent.putExtra("UserEmail", UserEmail);
+        Toast.makeText(ShopperMain.this, "There is no escape!",Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+        finish();
     }
 }

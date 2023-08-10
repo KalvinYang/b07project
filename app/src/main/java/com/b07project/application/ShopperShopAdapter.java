@@ -1,5 +1,7 @@
 package com.b07project.application;
 
+import static com.b07project.application.ShopperMain.UserEmail;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,13 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
 
     Context context;
     ArrayList<String> items;
-    //String brand;
+    String brand;
     private ViewShopItemClickListener viewShopItemClickListener;
 
-    public ShopperShopAdapter(Context context, ArrayList<String> items, /*String brand,*/ ViewShopItemClickListener viewShopItemClickListener){
+    public ShopperShopAdapter(Context context, ArrayList<String> items, String brand, ViewShopItemClickListener viewShopItemClickListener){
         this.context = context;
         this.items = items;
-        //this.brand = brand;
+        this.brand = brand;
         this.viewShopItemClickListener = viewShopItemClickListener;
     }
 
@@ -41,7 +43,7 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
         holder.viewItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewShopItemClickListener.ViewShopItemClick(item);
+                viewShopItemClickListener.ViewShopItemClick(item, brand);
             }
         });
     }
@@ -53,18 +55,17 @@ public class ShopperShopAdapter extends RecyclerView.Adapter<ShopperShopAdapter.
 
     public static class ShopperShopHolder extends RecyclerView.ViewHolder{
         TextView itemName;
-        Button viewItemBtn, AddToCartBtn;
+        Button viewItemBtn;
 
         public ShopperShopHolder(@NonNull View itemView){
             super(itemView);
             itemName = itemView.findViewById(R.id.ItemName);
             viewItemBtn = itemView.findViewById(R.id.ViewItemButton);
-            AddToCartBtn = itemView.findViewById(R.id.AddToCartButton);
         }
     }
 
     public interface ViewShopItemClickListener{
-        public void ViewShopItemClick(String ViewStoreItemName);
+        public void ViewShopItemClick(String ViewStoreItemName, String brand);
     }
 
 }

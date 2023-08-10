@@ -1,5 +1,7 @@
 package com.b07project.application;
 
+import static com.b07project.application.ShopperMain.UserEmail;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,13 +34,14 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    //private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
-    private ArrayList<TestStore> storeArr;
+    //private String mParam2;
+    private ArrayList<String> storeArr;
     private RecyclerView shopsRecycler;
+    TextView shopsTitle;
 
     DatabaseReference ref = MainActivity.db.getReference("Owner");
 
@@ -50,15 +54,14 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ShopsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShopsFragment newInstance(String param1, String param2) {
+    public static ShopsFragment newInstance(String param1/*, String param2*/) {
         ShopsFragment fragment = new ShopsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,7 +71,7 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            //mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -85,53 +88,27 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
         storeArr = new ArrayList<>();
 
         shopsRecycler = view.findViewById(R.id.ShopsRecyclerView);
+        shopsTitle = view.findViewById(R.id.ShopsHeader);
         shopsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         shopsRecycler.setHasFixedSize(true);
         ShopsAdapter shopsAdapter = new ShopsAdapter(getContext(),storeArr,this);
         shopsRecycler.setAdapter(shopsAdapter);
         //Take note of this line right below
-
+        shopsTitle.setText(UserEmail);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 storeArr.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String brand = dataSnapshot.getKey();
-                    TestStore store = new TestStore(brand);
-                    storeArr.add(store);
-
+                    storeArr.add(brand);
                 }
                 shopsAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
-
-
-
-
-
-    }
-
-    private void dataInitialize(){
-
-        storeArr = new ArrayList<>();
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
     }
 
     @Override
