@@ -39,7 +39,7 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
     // TODO: Rename and change types of parameters
     private String mParam1;
     //private String mParam2;
-    private ArrayList<TestStore> storeArr;
+    private ArrayList<String> storeArr;
     private RecyclerView shopsRecycler;
     TextView shopsTitle;
 
@@ -101,8 +101,7 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
                 storeArr.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String brand = dataSnapshot.getKey();
-                    TestStore store = new TestStore(brand);
-                    storeArr.add(store);
+                    storeArr.add(brand);
                 }
                 shopsAdapter.notifyDataSetChanged();
             }
@@ -110,23 +109,6 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-    }
-
-    private void dataInitialize(){
-
-        storeArr = new ArrayList<>();
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
-        storeArr.add(new TestStore("Store1"));
-        storeArr.add(new TestStore("Store2"));
     }
 
     @Override

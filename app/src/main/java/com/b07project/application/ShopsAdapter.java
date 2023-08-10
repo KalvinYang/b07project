@@ -18,13 +18,13 @@ import java.util.ArrayList;
 public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsHolder> {
 
     Context context;
-    ArrayList<TestStore> TestStoreArr;
+    ArrayList<String> StoreArr;
 
     private ViewShopClickListener viewShopClickListener;
 
-    public ShopsAdapter(Context context, ArrayList<TestStore> TestStoreArr, ViewShopClickListener viewShopClickListener) {
+    public ShopsAdapter(Context context, ArrayList<String> StoreArr, ViewShopClickListener viewShopClickListener) {
         this.context = context;
-        this.TestStoreArr = TestStoreArr;
+        this.StoreArr = StoreArr;
         this.viewShopClickListener = viewShopClickListener;
     }
 
@@ -39,19 +39,19 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ShopsHolder holder, int position) {
-        TestStore testStore = TestStoreArr.get(position);
-        holder.shopRowName.setText(testStore.StoreName);
+        String store = StoreArr.get(position);
+        holder.shopRowName.setText(store);
         holder.viewShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewShopClickListener.ViewShopClick(testStore.StoreName);
+                viewShopClickListener.ViewShopClick(store);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return TestStoreArr.size();
+        return StoreArr.size();
     }
 
     public static class ShopsHolder extends RecyclerView.ViewHolder{
