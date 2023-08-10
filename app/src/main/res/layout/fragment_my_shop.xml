@@ -26,6 +26,7 @@
             android:id="@+id/MyShopPageRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:backgroundTint="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/MyShopAddItemToStoreButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +40,7 @@
             android:backgroundTint="#000000"
             android:fontFamily="serif"
             android:text="Add An Item to Store"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

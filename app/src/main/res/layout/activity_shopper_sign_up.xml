@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
     tools:context=".ShopperSignUpActivity">
 
     <Button
@@ -14,6 +15,7 @@
         android:backgroundTint="#000000"
         android:fontFamily="serif"
         android:text="Sign Up"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +28,7 @@
         android:layout_marginTop="156dp"
         android:fontFamily="serif"
         android:text="Shopper Sign Up"
+        android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.319"
@@ -37,10 +40,11 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:drawableLeft="@drawable/baseline_email_24"
         android:ems="10"
         android:hint="Email"
-        android:drawableLeft="@drawable/baseline_email_24"
         android:inputType="text|textLongMessage"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +59,7 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
@@ -70,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <Button
         android:id="@+id/button2"
@@ -80,6 +85,7 @@
         android:backgroundTint="#000000"
         android:onClick="fromShopperToSignUp"
         android:text="Back"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"

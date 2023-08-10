@@ -106,8 +106,7 @@ public class ShopperShpItemFragment extends Fragment {
                             ShopViewItemBrand.setText(mParam2);
                             ShopViewItemDescription.setText(snapshot1.child("description").getValue(String.class));
                             ShopViewItemSpecification.setText(snapshot1.child("specifications").getValue(String.class));
-                            ShopViewItemPrice.setText(Float.toString(snapshot1.child("price").getValue(float.class)));
-
+                            ShopViewItemPrice.setText("$"+ Float.toString(snapshot1.child("price").getValue(float.class)));
                         }
                     }
                 }

@@ -94,7 +94,7 @@ public class ShopsFragment extends Fragment implements ShopsAdapter.ViewShopClic
         ShopsAdapter shopsAdapter = new ShopsAdapter(getContext(),storeArr,this);
         shopsRecycler.setAdapter(shopsAdapter);
         //Take note of this line right below
-        shopsTitle.setText(UserEmail);
+        //shopsTitle.setText(UserEmail);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

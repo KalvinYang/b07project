@@ -27,6 +27,7 @@
             android:id="@+id/StorePageRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/ShopperShopDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
             android:backgroundTint="#000000"
             android:fontFamily="serif"
             android:text="Back"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

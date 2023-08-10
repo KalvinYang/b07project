@@ -70,7 +70,6 @@ public class orderDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_orderdetails, container, false);
 
         c = ((ShopperMain) getActivity()).getPasser();
-        Button cancelButton = view.findViewById(R.id.cancelButton);
         TextView status = view.findViewById(R.id.statusTxt);
         ImageView back = view.findViewById(R.id.backBtn);
         TextView price = view.findViewById(R.id.totalTxt);
@@ -85,17 +84,6 @@ public class orderDetailsFragment extends Fragment {
         recycle.setAdapter(adapter);
 
         status.setText(c.status);
-        if (!c.status.equals("Canceled")) {
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    status.setText("Canceled");
-                    c.cancelCart();
-                    cancelButton.setVisibility(View.GONE);
-                    ((ShopperMain) getActivity()).refreshOrderAdapter();
-                }
-            });
-        } else cancelButton.setVisibility(View.GONE);
         //return view;
 
 

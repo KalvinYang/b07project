@@ -12,7 +12,7 @@
     <Button
         android:id="@+id/OwnerOrders"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:fontFamily="serif"
         android:text="My Orders"
@@ -22,20 +22,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/MyCartButton"
         app:layout_constraintTop_toTopOf="@+id/ShopButton" />
-
-    <Button
-        android:id="@+id/MyCartButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:backgroundTint="#000000"
-        android:fontFamily="serif"
-        android:text="My Cart"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/OwnerOrders"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/OwnerOrders" />
 
     <Button
         android:id="@+id/ShopButton"
@@ -48,12 +34,40 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/OwnerOrders"
+        app:layout_constraintStart_toEndOf="@+id/OwnerOrders" />
+
+    <Button
+        android:id="@+id/MyCartButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#000000"
+        android:fontFamily="serif"
+        android:text="My Cart"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/OwnerOrders"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ShopperFrameLayout" />
+
+    <Button
+        android:id="@+id/LogOut"
+        android:layout_width="540dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#000000"
+        android:fontFamily="serif"
+        android:onClick="fromShopperMainToMain"
+        android:text="Log Out"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/ShopperMainTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/ShopperMainTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:text="Welcome Shopper"
@@ -61,32 +75,22 @@
         android:textColor="#000000"
         android:textSize="34dp"
         app:layout_constraintBottom_toTopOf="@+id/ShopperFrameLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/LogOut"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:backgroundTint="#000000"
-        android:fontFamily="serif"
-        android:onClick="fromShopperMainToMain"
-        android:text="Log Out"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/ShopperMainTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ShopperMainTitle"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LogOut" />
 
     <FrameLayout
         android:id="@+id/ShopperFrameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/ShopButton"
+        app:layout_constraintBottom_toTopOf="@+id/MyCartButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ShopperMainTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/ShopperMainTitle">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

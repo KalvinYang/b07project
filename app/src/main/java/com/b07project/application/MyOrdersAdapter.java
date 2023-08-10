@@ -71,8 +71,6 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
                     .addToBackStack(null)
                     .commit();
         });
-
-
     }
 
     @Override
