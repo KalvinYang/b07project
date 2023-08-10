@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -63,5 +64,17 @@ public class StoreOwnerMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);
         fragmentTransaction.commit();
     }
-
+    public void fromStoreOwnerMainToMain(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(StoreOwnerMain.this, StoreOwnerMain.class);
+        StoreEmail = getIntent().getStringExtra("UserEmail");
+        intent.putExtra("UserEmail", StoreEmail);
+        intent.putExtra("ninjago", brandon);
+        startActivity(intent);
+        finish();
+    }
 }

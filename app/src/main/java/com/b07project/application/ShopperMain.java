@@ -92,4 +92,13 @@ public class ShopperMain extends AppCompatActivity {
     {
         this.adapter = adapter;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ShopperMain.this, ShopperMain.class);
+        UserEmail = getIntent().getStringExtra("UserEmail");
+        intent.putExtra("UserEmail", UserEmail);
+        startActivity(intent);
+        finish();
+    }
 }
