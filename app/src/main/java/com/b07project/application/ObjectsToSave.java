@@ -18,7 +18,6 @@ abstract class ObjectsToSave {
     abstract Map<String, Object> createHashMap();
 
     public void updateObject(String key, Map<String, Object> map) {
-        MainActivity.db.getReference().child("Status").setValue("Trying");
         ref.child(key).updateChildren(map);
     }
     public String saveObject(Map<String, Object> map) {

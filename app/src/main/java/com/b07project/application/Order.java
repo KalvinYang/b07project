@@ -34,18 +34,19 @@ class Order extends ObjectsToSave{
     String changeStatus(User a) {
         if (a instanceof Shopper && status.equals("Cart")) {
             status = "Ordered";
+            return saveObject(createHashMap());
         }
         else if (a instanceof StoreOwner) {
             status = "Complete";
         }
-        return saveObject(createHashMap());
+        return "";
     }
 
 
 
     String cancelOrder() {
         status = "Canceled";
-        //return updateObject(key, createHashMap());
+
         return "Go Fuck Yourself";
         //return updateObject(key, createHashMap());
         //return "go fuck yourself";
