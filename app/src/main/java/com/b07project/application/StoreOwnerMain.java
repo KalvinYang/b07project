@@ -61,7 +61,6 @@ public class StoreOwnerMain extends AppCompatActivity {
     private void replacetoMyOrderFragment(Fragment fragment/*, String brand*/){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragment = OrdersFragment.newInstance();
         fragmentTransaction.replace(R.id.StoreOwnerFrameLayout,fragment);
         fragmentTransaction.commit();
     }

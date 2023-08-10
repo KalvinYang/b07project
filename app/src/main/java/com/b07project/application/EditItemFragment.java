@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -86,7 +87,6 @@ public class EditItemFragment extends Fragment {
         EditText editSpecification = view.findViewById(R.id.EditItemSpecification);
         EditText editPrice = view.findViewById(R.id.EditItemPrice);
         Item i = new Item();
-        //i.findItem(mParam1,mParam2);
 
         Query query = ref.orderByChild("name").equalTo(mParam1);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -101,16 +101,10 @@ public class EditItemFragment extends Fragment {
                             i.description = snapshot1.child("description").getValue(String.class);
                             i.specifications = snapshot1.child("specifications").getValue(String.class);
                             i.price = snapshot1.child("price").getValue(float.class);
-
-
-
                             editItemName.setText(i.name);
                             editDescription.setText(i.description);
                             editSpecification.setText(i.specifications);
                             editPrice.setText(String.valueOf(i.price));
-
-
-
                         }
                     }
                 }
@@ -137,13 +131,31 @@ public class EditItemFragment extends Fragment {
         EditShopItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Something to edit the store's items mparam1 = itemName, mparam2 = brand
                 i.name = editItemName.getText().toString().trim();
                 i.specifications = editSpecification.getText().toString().trim();
                 i.description = editDescription.getText().toString().trim();
                 i.price = Float.parseFloat((editPrice.getText().toString().trim()));
 
-                i.updateItem(key);
+
+                Query query = ref.orderByChild("name").equalTo(mParam1);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
+                            if (mParam2.equals(snapshot1.child("brand").getValue(String.class))) {
+                                Toast.makeText(getContext(), "Item name already under use. Please choose another", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                        i.updateItem(key);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
 
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
                 MyShopFragment fragment = MyShopFragment.newInstance(mParam2);

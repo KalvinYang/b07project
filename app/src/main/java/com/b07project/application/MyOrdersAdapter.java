@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHolder> {
 
-    //private Cart[] localDataSet;
     ArrayList<Cart> localDataSet;
     private ShopperMain s;
 

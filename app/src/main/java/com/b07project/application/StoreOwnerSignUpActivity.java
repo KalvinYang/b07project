@@ -70,8 +70,9 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                                     Toast.makeText(StoreOwnerSignUpActivity.this, "Brand name already under use. Please choose another", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                                createAccount(brand,email,password);
+
                             }
+                            createAccount(brand,email,password);
                         }
 
                         @Override

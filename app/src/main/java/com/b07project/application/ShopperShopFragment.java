@@ -96,7 +96,7 @@ public class ShopperShopFragment extends Fragment implements ShopperShopAdapter.
 
         Query query = ref.orderByChild("brand").equalTo(mParam1);
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if ( snapshot.exists()){

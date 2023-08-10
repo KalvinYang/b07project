@@ -47,7 +47,7 @@ class Order extends ObjectsToSave{
     String cancelOrder() {
         status = "Canceled";
 
-        return "Go Fuck Yourself";
+        return "";
         //return updateObject(key, createHashMap());
         //return "go fuck yourself";
     }

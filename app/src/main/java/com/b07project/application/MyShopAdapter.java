@@ -1,13 +1,18 @@
 package com.b07project.application;
 
+import static android.content.Intent.getIntent;
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -46,8 +51,10 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
         });
         holder.RemoveItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { Item.deleteobject(item, brand);
-
+            public void onClick(View view) {
+                Item.deleteobject(item, brand);
+                ///MyShopFragment fragment = MyShopFragment.newInstance(brand);
+                Toast.makeText(view.getContext(), "Refresh Page",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -72,4 +79,5 @@ public class MyShopAdapter extends RecyclerView.Adapter<MyShopAdapter.MyShopHold
     public interface MyShopEditItemClickListener{
         public void editItemClick(String item, String brand);
     }
+
 }

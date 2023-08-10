@@ -17,9 +17,8 @@ public class Item extends ObjectsToSave{
     float price;
     String brand;
     String specifications;
-    private String key;
 
-    //image field may be introduced
+
 
     DatabaseReference ref = MainActivity.db.getReference("Item");
 
@@ -36,28 +35,6 @@ public class Item extends ObjectsToSave{
         this.specifications = specifications;
     }
 
-    //Following methods need to reflect changes in firebase
-
-    void Modify_name(String name){
-        this.name = name;
-    }
-
-    void Modify_description(String description){
-        this.description = description;
-    }
-
-    void Modify_price(float price){
-        this.price = price;
-    }
-
-    void Modify_brand(String brand){
-        this.brand = brand;
-    }
-
-    void Modify_specifications(String specifications){
-        this.specifications = specifications;
-    }
-
     void updateItem(String key){
         updateObject(key, createHashMap());
     }
@@ -71,7 +48,7 @@ public class Item extends ObjectsToSave{
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //ref.child("testing1").setValue(snapshot.toString());
+
 
                 for(DataSnapshot sn : snapshot.getChildren()) {
                     if (sn.child("brand").getValue().equals(brand)) {

@@ -114,8 +114,12 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
         myShopRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         myShopRecyclerView.setHasFixedSize(true);
 
+
+        MyShopAdapter myshopAdapter = new MyShopAdapter(getContext(), items, mParam1, MyShopFragment.this);
+        myShopRecyclerView.setAdapter(myshopAdapter);
+
         Query query = ref.orderByChild("brand").equalTo(mParam1);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot sn : snapshot.getChildren()){
@@ -123,8 +127,6 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
                     items.add(name);
                 }
 
-                MyShopAdapter myshopAdapter = new MyShopAdapter(getContext(), items, mParam1, MyShopFragment.this);
-                myShopRecyclerView.setAdapter(myshopAdapter);
                 myshopAdapter.notifyDataSetChanged();
             }
 
@@ -169,5 +171,6 @@ public class MyShopFragment extends Fragment implements MyShopAdapter.MyShopEdit
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 
 }

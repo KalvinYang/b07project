@@ -2,6 +2,7 @@ package com.b07project.application;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -10,6 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +26,6 @@ import android.widget.EditText;
  */
 public class AddItemFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -39,7 +46,6 @@ public class AddItemFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment AddItemFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static AddItemFragment newInstance(String param1, String param2) {
         AddItemFragment fragment = new AddItemFragment();
         Bundle args = new Bundle();
@@ -84,14 +90,38 @@ public class AddItemFragment extends Fragment {
         additembutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Adds an item to the store also mParam1 is the brand
                 String name = itemName.getText().toString().trim();
                 String description = itemDescription.getText().toString().trim();
                 String specification = itemSpecifications.getText().toString().trim();
                 float price = Float.valueOf(itemPrice.getText().toString().trim());
 
-                Item newItem = new Item(name, description, price, mParam1, specification);
-                newItem.saveItem();
+                DatabaseReference ref_item = MainActivity.db.getReference("Item");
+
+                Query query = ref_item.orderByChild("name").equalTo(name);
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for ( DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                if (mParam1.equals(snapshot1.child("brand").getValue(String.class))) {
+                                    Toast.makeText(getContext(), "Item name already under use. Please choose another", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+                            Item newItem = new Item(name, description, price, mParam1, specification);
+                            newItem.saveItem();
+                            itemName.setText("");
+                            itemDescription.setText("");
+                            itemPrice.setText("");
+                            itemSpecifications.setText("");
+                            Toast.makeText(getContext(), "Add more items or click Back to go to previous page", Toast.LENGTH_SHORT).show();
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
 
