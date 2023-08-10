@@ -17,7 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class StoreOwnerSignUpActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword, editTextBrand;
@@ -58,6 +61,24 @@ public class StoreOwnerSignUpActivity extends AppCompatActivity {
                     Toast.makeText(StoreOwnerSignUpActivity.this, "Enter brand name", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    //slower than authentication so need to improve
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ownerShot : snapshot.getChildren()) {
+                                if (ownerShot.getKey().equals(brand)) {
+                                    Toast.makeText(StoreOwnerSignUpActivity.this, "Brand name already under use. Please choose another", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                });
+
+
                 progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
