@@ -1,5 +1,8 @@
 package com.b07project.application;
 
+import static com.b07project.application.StoreOwnerMain.StoreEmail;
+import static com.b07project.application.StoreOwnerMain.brandon;
+
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -60,7 +63,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        StoreOwner a = new StoreOwner("foo", "bar", "Nike");
+        StoreOwner a = new StoreOwner(StoreEmail,  brandon);
         Order current = localDataSet.get(position);
         viewHolder.getOrderID().setText(String.valueOf (current.price));
         viewHolder.getStatus().setText(current.status);
@@ -73,8 +76,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 viewHolder.getStatus().setText(current.status);
                 viewHolder.getCompleteButton().setEnabled(false);
                 viewHolder.getCompleteButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
+
                 notifyDataSetChanged();
                 //TODO: Perform database access here to mark the localDataSet[position] order object to the 'Completed' status
+
                 viewHolder.getCompleteButton().setOnClickListener(null);
             });
         }
@@ -88,12 +93,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         else
         {
             viewHolder.getCanceledButton().setOnClickListener(v -> {
-                current.changeStatus(a);
+                current.cancelOrder();
                 viewHolder.getStatus().setText(current.status);
                 viewHolder.getCanceledButton().setEnabled(false);
                 viewHolder.getCanceledButton().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#808080")));
                 notifyDataSetChanged();
                 //TODO: Perform database access here to mark the localDataSet[position] order object to the 'Canceled' status
+
                 viewHolder.getCanceledButton().setOnClickListener(null);
             });
 

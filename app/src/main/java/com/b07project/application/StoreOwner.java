@@ -9,4 +9,10 @@ class StoreOwner extends User{
         super(username, password);
         this.brand = brand;
     }
+
+    StoreOwner(String username, String brand){
+        super();
+        this.username = username;
+        this.brand = brand;
+    }
 }

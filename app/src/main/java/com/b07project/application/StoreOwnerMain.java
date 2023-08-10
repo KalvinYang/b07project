@@ -16,6 +16,7 @@ public class StoreOwnerMain extends AppCompatActivity {
     TextView storeOwner;
 
     public static String brandon;
+    public static String StoreEmail;
 
 
     @Override
@@ -27,6 +28,7 @@ public class StoreOwnerMain extends AppCompatActivity {
         StoreOwnerViewMyShopBtn = findViewById(R.id.ViewMyShopButton);
         storeOwner = findViewById(R.id.StoreOwnerMain);
         brandon = getIntent().getStringExtra("ninjago");
+        StoreEmail = getIntent().getStringExtra("UserEmail");
         String gandum = getIntent().getStringExtra("ninjago");
 
         storeOwner.setText(gandum);
